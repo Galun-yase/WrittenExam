@@ -2,10 +2,10 @@ public class Solution1160 {
     public int countCharacters(String[] words,String chars){
         int[] chars_count=count(chars);
         int len=0;
-        for (int i = 0; i <words.length ; i++) {
-            int[] word_count=count(words[i]);
-            if (compare(chars_count,word_count)){
-                len+=words[i].length();
+        for (String word : words) {
+            int[] word_count = count(word);
+            if (compare(chars_count, word_count)) {
+                len += word.length();
             }
         }
         return len;
