@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 
 public class Test {
     public int maxAreaOfIsland(int[][] grid) {
@@ -20,5 +21,10 @@ public class Test {
         num+=dfs(i,j-1,grid);
         num+=dfs(i,j+1,grid);
         return num;
+    }
+    public static void main(String[] args){
+        Object[] a=new Object[4];
+        char[] aa={1,3};
+        System.out.println();
     }
 }
