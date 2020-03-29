@@ -1,30 +1,49 @@
+import javax.management.Query;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class Test {
-    public int maxAreaOfIsland(int[][] grid) {
-        int res=0;
-        for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[i].length;j++){
-                res=Math.max(res,dfs(i,j,grid));
+
+    public static void  quickSort(int[] seqList,int left,int right){
+        if (left<right){
+            int index_middle=partition(seqList,left,right);
+            quickSort(seqList,left,index_middle-1);
+            quickSort(seqList,index_middle+1,right);
+        }
+    }
+
+
+
+    //寻找基准数的位置，并使数组左边小于这个基准数，右边大于这个基准数
+    private static int partition(int[] seqList,int first,int last){
+        int pivotkey=seqList[first];//基准数，最后返回他的位置
+        while (first<last){
+            while (first<last && seqList[last]>=pivotkey){
+                last--;
             }
+            seqList[first]=seqList[last];
+            while (first<last && seqList[first]<=pivotkey){
+                first++;
+            }
+            seqList[last]=seqList[first];
         }
-        return res;
+        seqList[first]=pivotkey;
+        return first;
     }
-    private int dfs(int i,int j,int[][] grid){
-        if(i<0 || j<0 || i>grid.length || j>grid[i].length || grid[i][j]==0){
-            return 0;
-        }
-        int num=1;
-        grid[i][j]=0;
-        num+=dfs(i-1,j,grid);
-        num+=dfs(i+1,j,grid);
-        num+=dfs(i,j-1,grid);
-        num+=dfs(i,j+1,grid);
-        return num;
-    }
+
+
+
     public static void main(String[] args){
-        Object[] a=new Object[4];
-        char[] aa={1,3};
-        System.out.println();
+        int[] b={2,3,4,5,2,3,5};
+        Test.quickSort(b,0,b.length-1);
+
+        System.out.println(Arrays.toString(b));
+
+
+
     }
 }
