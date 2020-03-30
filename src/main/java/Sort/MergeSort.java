@@ -17,25 +17,27 @@ public class MergeSort {
     //将两个有序表合并为一个表
     private static void merge(int[] seqList,int left,int mid,int right){
         int[] tempList=new int[seqList.length];
-        int leftStart=left;
-        int rightStart=mid+1;
-        int tempIndex=left;
+        int i=left;        //左序列指针
+        int j=mid+1;       //右序列指针
+        int t=0;        //临时序列指针
 
-        while (leftStart<=mid && rightStart<=right){
-            if (seqList[leftStart]<seqList[rightStart]){
-                tempList[tempIndex++]=seqList[leftStart++];
+        while (i<=mid && j<=right){
+            if (seqList[i]<=seqList[j]){
+                tempList[t++]=seqList[i++];
             }else {
-                tempList[tempIndex++]=seqList[rightStart++];
+                tempList[t++]=seqList[j++];
             }
         }
-        while (leftStart<=mid){
-            tempList[tempIndex++]=seqList[leftStart++];
+        while (i<=mid){
+            tempList[t++]=seqList[i++];
         }
-        while(rightStart<=right){
-            tempList[tempIndex++]=seqList[rightStart++];
+        while (j<=right){
+            tempList[t++]=seqList[j++];
         }
-        while(left<=right){
-            seqList[left]=tempList[left++];
+        t=0;
+        while (left<=right){
+            seqList[left++]=tempList[t++];
         }
+
     }
 }
