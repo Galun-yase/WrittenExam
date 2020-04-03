@@ -10,57 +10,29 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class Test {
 
+
     public static void main(String[] args) {
-        ReadWriteLockDemo rw = new ReadWriteLockDemo();
-
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                rw.set((int)(Math.random() * 101));
-            }
-        }, "Write:").start();
+        B b=new B();
+        System.out.println(b.name);
+        System.out.println(b.getName());
 
 
-        for (int i = 0; i < 100; i++) {
-            new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    rw.get();
-                }
-            }).start();
-        }
     }
+}
+
+class A{
+     public String name="123";
+
+     public String getName(){
+         return name;
+     }
 
 }
 
-class ReadWriteLockDemo{
+class B extends A{
 
-    private int number = 0;
-
-    private ReadWriteLock lock = new ReentrantReadWriteLock();
-
-    //读
-    public void get(){
-        lock.readLock().lock(); //上锁
-
-        try{
-            System.out.println(Thread.currentThread().getName() + " : " + number);
-        }finally{
-            lock.readLock().unlock(); //释放锁
-        }
-    }
-
-    //写
-    public void set(int number){
-        lock.writeLock().lock();
-
-        try{
-            System.out.println(Thread.currentThread().getName());
-            this.number = number;
-        }finally{
-            lock.writeLock().unlock();
-        }
+    public String name="bbb";
+    public String getName(){
+        return name;
     }
 }
