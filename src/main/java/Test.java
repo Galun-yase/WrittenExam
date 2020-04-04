@@ -10,29 +10,15 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class Test {
 
+    private static String a="s" ;
 
     public static void main(String[] args) {
-        B b=new B();
-        System.out.println(b.name);
-        System.out.println(b.getName());
+        System.out.println(Test.a);
 
+        Test test=new Test();
+        System.out.println();
 
-    }
-}
+        System.out.println(test.a);
 
-class A{
-     public String name="123";
-
-     public String getName(){
-         return name;
-     }
-
-}
-
-class B extends A{
-
-    public String name="bbb";
-    public String getName(){
-        return name;
     }
 }
