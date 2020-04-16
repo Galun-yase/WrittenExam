@@ -1,3 +1,5 @@
+import Offer.ListNode;
+
 public class Solution876 {
 
     public ListNode middleNode(ListNode head) {

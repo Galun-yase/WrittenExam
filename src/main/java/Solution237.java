@@ -1,3 +1,5 @@
+import Offer.ListNode;
+
 public class Solution237 {
     ListNode head=new ListNode(0);
 
@@ -9,9 +11,4 @@ public class Solution237 {
 }
 
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
 
-}
