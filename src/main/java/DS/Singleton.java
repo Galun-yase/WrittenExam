@@ -86,7 +86,7 @@ class Singleton5{
     }
 
     //防止序列化破坏
-    private Object readResovle(){
+    private Object readResolve(){
         return instance;
     }
 

@@ -21,7 +21,7 @@ public class offer46 {
         return p.next;
     }
 
-    public int LastRemaining_Solution(int n, int m) {
+    public int LastRemaining_Solution1(int n, int m) {
         if (n<=0 || m<= 0)return -1;
 
         Node head=new Node(0);
@@ -50,8 +50,22 @@ public class offer46 {
         }
     }
 
+    public int f(int n, int m){
+        if (n==1)return 0;
+        int x = f(n-1,m);
+        return (m+x)%n;
+    }
+
+
+    //递归实现
+    public int LastRemaining_Solution(int n, int m) {
+        if (n<=0)return -1;
+        return f(n,m);
+    }
+
     public static void main(String[] args) {
-        new offer46().LastRemaining_Solution(5,3);
+        int i = new offer46().LastRemaining_Solution(5, 3);
+        System.out.println(i);
     }
 
 
