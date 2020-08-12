@@ -14,6 +14,11 @@
             <version>4.13</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27</version>
+        </dependency>
     </dependencies>
 
 
