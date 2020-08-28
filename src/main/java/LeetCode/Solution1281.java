@@ -1,3 +1,5 @@
+package LeetCode;
+
 public class Solution1281 {
 
     public int subtractProductAndSum(int n) {

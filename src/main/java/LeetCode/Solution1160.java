@@ -1,3 +1,5 @@
+package LeetCode;
+
 public class Solution1160 {
     public int countCharacters(String[] words,String chars){
         int[] chars_count=count(chars);

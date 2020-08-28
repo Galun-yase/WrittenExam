@@ -1,3 +1,5 @@
+package Exam;
+
 import java.util.Scanner;
 
 //AC87.5%

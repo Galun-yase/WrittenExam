@@ -1,3 +1,5 @@
+package Exam;
+
 import java.util.Scanner;
 
 public class ByteDance7 {

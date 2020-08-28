@@ -1,3 +1,5 @@
+package LeetCode;
+
 import Offer.ListNode;
 
 public class Solution876 {

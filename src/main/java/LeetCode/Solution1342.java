@@ -1,3 +1,5 @@
+package LeetCode;
+
 public class Solution1342 {
 
     public int numberOfSteps (int num) {

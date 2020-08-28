@@ -1,3 +1,5 @@
+package LeetCode;
+
 public class Solution17_16 {
 
 
