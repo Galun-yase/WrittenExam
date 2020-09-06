@@ -1,7 +1,12 @@
 package Exam;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author 任青成
@@ -14,6 +19,8 @@ class Node{
     public Node right;
 }
 public class KJL {
+
+    //水平输出
 
     public void outPlat(Node root){
         Queue<Node> queue = new LinkedList<>();
@@ -44,6 +51,48 @@ public class KJL {
         }
     }
 
+
+    //垂直输出
+
+    void straite(Node root){
+
+        Stack<Node> stack = new Stack<>();
+        if (root!=null)stack.add(root);
+        dfs(stack);
+    }
+
+    private void dfs(Stack<Node> stack) {
+        if (stack.isEmpty())return;
+        Node currNode = stack.peek();
+        if (currNode.left==null&&currNode.middle==null&&currNode.right==null){
+            List<Node> list = new ArrayList<>(stack);
+            Iterator<Node> iterator = list.iterator();
+            while (iterator.hasNext()){
+                System.out.print(iterator.next().value+",");
+            }
+
+
+            System.out.println();
+            stack.pop();
+            return;
+        }
+
+        if (currNode.left!=null){
+            stack.add(currNode.left);
+            dfs(stack);
+        }
+        if (currNode.middle!=null){
+            stack.add(currNode.middle);
+            dfs(stack);
+        }
+        if (currNode.right!=null){
+            stack.add(currNode.right);
+            dfs(stack);
+        }
+
+    }
+
+
     public static void main(String[] args) {
         Node root = new Node();root.value="A";
         root.left=new Node();root.left.value="B";
@@ -52,6 +101,7 @@ public class KJL {
         root.right.left=new Node();root.right.left.value="g";
         root.right.right=new Node();root.right.right.value="k";
         new KJL().outPlat(root);
+        new KJL().straite(root);
     }
 
 }

@@ -53,9 +53,6 @@ public class SelectSort {
             }
         }
         seqList[i]=temp;
-
-
-
     }
 
     //交换元素位置

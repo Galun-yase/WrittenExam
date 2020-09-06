@@ -1,28 +1,20 @@
 package DS;
 
 //单例模式一般有5种实现方式：饿汉式、懒汉式、双重检查、静态内部类、枚举。本题数据静态内部类来实现单例模式。
+
+//饿汉式（static表示在类加载的时候已经被初始化）
 public class Singleton {
-
-    //饿汉式（static表示在类加载的时候已经被初始化）
-    private static Singleton instance=new Singleton();
-
-    //私有构造方法
     private Singleton(){}
-    //对外提供获取实例的静态方法
+    private static Singleton instance=new Singleton();
     public static Singleton getInstance(){
         return instance;
     }
-
-
 }
 
 //懒汉式（真正被使用的时候才初始化）
 class Singleton2{
-
-    private static Singleton2 instance;
-
     private Singleton2(){}
-
+    private static Singleton2 instance=null;
     private static Singleton2 getInstance(){
         if (instance==null){
             instance=new Singleton2();
@@ -35,10 +27,8 @@ class Singleton2{
 //线程安全的懒汉式
 class Singleton3{
 
-    private static Singleton3 instance;
-
+    private static volatile Singleton3 instance=null;
     private Singleton3(){};
-
     private static synchronized Singleton3 getInstance(){
         if (instance==null){
             instance=new Singleton3();
@@ -47,14 +37,12 @@ class Singleton3{
     }
 }
 
-//线程安全的懒汉式(更高效，锁粒度小，双重校验锁)
+//双重校验锁
 class Singleton4{
 
-    private static Singleton4 instance;
+    private static volatile Singleton4 instance=null;
     private Singleton4(){};
-
     private static  Singleton4 getInstance(){
-
         if (instance==null){
             synchronized (Singleton4.class){
                 if (instance==null){
@@ -68,33 +56,22 @@ class Singleton4{
 
 }
 
-//序列化破坏
+//静态内部类
 class Singleton5{
-
-    private static Singleton5 instance;
+    private static class Holder{
+        private static Singleton5 instance = new Singleton5();
+    }
     private Singleton5(){};
-
-    private static  Singleton5 getInstance(){
-
-        if (instance==null){
-            synchronized (Singleton5.class){
-                if (instance==null){
-                    instance=new Singleton5();
-                }
-            }
-        }
-        return instance;
+    public static Singleton5 getInstance(){
+        return Holder.instance;
     }
 
-    //防止序列化破坏
-    private Object readResolve(){
-        return instance;
-    }
 
 }
-
+//以上都有反射和反序列化破坏单例
 //枚举式
 enum Singleton6{
     INSTANCE;
-    Singleton6(){}
+    Singleton6(){};//私有
+    //调用INSTANCE时会调用私有构造方法
 }
