@@ -14,15 +14,32 @@ public class offer12 {
         if (base==1)return 1;
         if (exponent==1)return base;
 
-        int res=1;
-        while (exponent!=0){
-            if ((exponent&1)==1){
+        int res = 1;
+        while (base!=0){
+            if ((exponent&1)!=0){
                 res*=base;
             }
+            exponent = exponent>>1;
             base*=base;
-            exponent=exponent>>>1;
         }
         return res;
+
+
+
+
+
+
+
+
+//        int res=1;
+//        while (exponent!=0){
+//            if ((exponent&1)==1){
+//                res*=base;
+//            }
+//            base*=base;
+//            exponent=exponent>>>1;
+//        }
+//        return res;
 
     }
 }

@@ -5,13 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class offer24 {
+
+
+
     public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
 
         ArrayList<ArrayList<Integer>> res=new ArrayList<>();
         ArrayList<Integer> cur=new ArrayList<>();
 
         helper(root,target,cur,res);
-
         Collections.sort(res, new Comparator<ArrayList<Integer>>() {
             @Override
             public int compare(ArrayList<Integer> o1, ArrayList<Integer> o2) {
@@ -22,10 +24,7 @@ public class offer24 {
                 }
             }
         });
-
         return res;
-
-
     }
 
     private void helper(TreeNode root, int target, ArrayList<Integer> cur, ArrayList<ArrayList<Integer>> res){

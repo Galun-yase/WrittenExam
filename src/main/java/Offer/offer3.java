@@ -1,8 +1,18 @@
 package Offer;
 import java.util.ArrayList;
+import java.util.List;
 
 public class offer3 {
-    public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+    //树先序递归
+    ArrayList<Integer> list = new ArrayList<>();
+    public ArrayList<Integer> printListFromTailToHead2(ListNode listNode) {
+        if (listNode==null)return new ArrayList<Integer>();
+        list= printListFromTailToHead(listNode.next);
+        list.add(listNode.val);
+        return list;
+    }
+
+        public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
     if (listNode==null)return new ArrayList<Integer>();
 
     ListNode curr=listNode;

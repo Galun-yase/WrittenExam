@@ -6,14 +6,28 @@ import java.util.Set;
 
 public class offer27{
     public ArrayList<String> Permutation(String str){
+        if (str.length()==0||str==null)return new ArrayList<String>();
 
-        ArrayList<String> list = new ArrayList<String>();
-        if(str!=null && str.length()>0){
-            PermutationHelper(str.toCharArray(),0,list);
-            Collections.sort(list);
-        }
+        HashSet<String> set = new HashSet<>();
+        helper(str.toCharArray(),0,set);
+
+        ArrayList<String> list = new ArrayList<>(set);
+        Collections.sort(list);
         return list;
     }
+
+    private void helper(char[] chars, int i, HashSet<String> set) {
+        if (i==chars.length-1){
+            set.add(String.valueOf(chars));
+        }else {
+            for (int j = i; j < chars.length; j++) {
+                swap(chars,i,j);
+                helper(chars,i+1,set);
+                swap(chars,i,j);
+            }
+        }
+    }
+
     private void PermutationHelper(char[] chars,int i,ArrayList<String> list){
         if(i == chars.length-1){
             list.add(String.valueOf(chars));
@@ -34,6 +48,12 @@ public class offer27{
         char temp = cs[i];
         cs[i] = cs[j];
         cs[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<String> abc = new offer27().Permutation("abc");
+
+        abc.stream().forEach(s -> System.out.println(s));
     }
 
 }
