@@ -3,6 +3,7 @@ package Exam;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,8 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 
-//AC100%
+//AC100% 先检查是否合法，在放入map中计数，最后做一个字典序排序
 public class Huawei1 {
-
-
-
-
 
     private static void select(String[] array){
         TreeMap<String,Integer> treemap=new TreeMap<>();
@@ -26,23 +23,21 @@ public class Huawei1 {
                 treemap.put(e,1);
             }
         }
-
-
-        Collection<Integer> list=treemap.values();
-        Iterator it=list.iterator();
-        int temp=0;
-        while (it.hasNext()){
-            temp=Math.max(temp,(int)it.next());
-        }
-
-        List<String> arraylist=new ArrayList<>();
-        for (Map.Entry<String,Integer> entry:treemap.entrySet()) {
-            if (entry.getValue()==temp){
-                arraylist.add(entry.getKey());
+        ArrayList<Map.Entry<String,Integer>> list = new ArrayList<>(treemap.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                if (o1.getValue()>o2.getValue()){
+                    return -1;
+                }else if (o1.getValue()<o2.getValue()){
+                    return 1;
+                }else {
+                    return o1.getKey().compareTo(o2.getKey());
+                }
             }
-        }
-        Collections.sort(arraylist);
-        System.out.println(arraylist.get(0));
+        });
+
+        System.out.println(list.get(0).getKey());
 
 
 
@@ -51,7 +46,6 @@ public class Huawei1 {
 
     private static boolean check(String[] array){
         for (int i = 0; i < array.length; i++) {
-
             char ch=array[i].charAt(0);
             if (ch<'A' || ch>'Z')return false;
             for (int j = 1; j < array[i].length(); j++) {
