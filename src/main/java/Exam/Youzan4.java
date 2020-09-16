@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @date 2020/9/11 16:50
  */
 public class Youzan4 {
-        public int minMoves (int[] nums) {
+    public int minMoves (int[] nums) {
         // write code here
         Arrays.sort(nums);
         int l = nums.length;
