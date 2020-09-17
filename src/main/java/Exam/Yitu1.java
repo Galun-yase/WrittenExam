@@ -1,6 +1,8 @@
+package Exam;
+
 import java.util.Scanner;
 
-public class Main {
+public class Yitu1 {
 
     private static int mindes(int[][] array,int[] t, int n) {
         double[] res = new double[n-1];
