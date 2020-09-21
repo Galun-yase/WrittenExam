@@ -1,6 +1,12 @@
+package Exam;
+
 import java.util.Scanner;
 
-public class Main {
+/**
+ * @author 任青成
+ * @date 2020/9/20 20:42
+ */
+public class DUxiaoman1 {
     private int maxkuai(String s1,String s2){
         int[] temp = new int[26];
 
@@ -27,12 +33,9 @@ public class Main {
         while (scanner.hasNext()){
             String s1 = scanner.nextLine();
             String s2 = scanner.nextLine();
-            int maxkuai = new Main().maxkuai(s1, s2);
+            int maxkuai = new DUxiaoman1().maxkuai(s1, s2);
             System.out.println(maxkuai);
 
         }
     }
-
 }
-
-
