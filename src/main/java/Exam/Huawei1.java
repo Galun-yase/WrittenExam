@@ -67,7 +67,7 @@ public class Huawei1 {
                 System.out.println("error.0001");
                 break;
             }
-            Huawei1.select(array);
+            select(array);
         }
 
 
