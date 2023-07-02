@@ -1,5 +1,50 @@
 # WrittenExam
-面试笔试题解
+
+## 数据结构
+
+数组Array 列表ArrayList(动态数组) 链表LinkedList(单向 环形 双向)
+
+栈Stack 单调栈
+
+> 栈Stack：peek pop push empty size
+
+队列Queue 双向队列Deque 优先队列PriorityQueue
+
+> 队列Queue：add remove element / offer poll peek
+>
+> - `LinkedList`：基于链表实现的队列，同时也实现了`Deque`接口。
+> - `ArrayDeque`：基于数组实现的队列，同时也实现了`Deque`接口。
+>
+> 双向队列Deque：addFirst addLast removeFirst removeLast getFirst getLast/ offer poll peek
+>
+> - `LinkedList`：基于链表实现的队列，同时也实现了`Deque`接口。
+> - `ArrayDeque`：基于数组实现的队列，同时也实现了`Deque`接口。
+>
+> 优先队列PriorityQueue：add remove / offer poll peek
+>
+> - `PriorityQueue`：基于堆实现的优先队列。
+
+哈希表Map Set
+
+> 哈希表：put set
+
+`?树、图`
+
+## 数据结构题目
+#### 数组：
+> - LeetCode 283、移动零
+> - LeetCode 26、删除有序数组中的重复项
+#### 链表：
+> - LeetCode 206、反转链表
+> - LeetCode 203、移除链表元素
+> - LeetCode 142、环形链表II
+> - LeetCode 160、相交链表
+> - LeetCode 876、链表的中间结点
+#### 栈：
+> - LeetCode 20、有效的括号
+> - LeetCode 150、逆波兰表达式求值
+
+## 面试笔试题解
 
 ### 剑指Offer
 查找：
