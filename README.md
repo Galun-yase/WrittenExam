@@ -34,6 +34,7 @@
 #### 数组：
 > - LeetCode 283、移动零
 > - LeetCode 26、删除有序数组中的重复项
+> - LeetCode 88、合并两个有序数组
 #### 链表：
 > - LeetCode 206、反转链表
 > - LeetCode 203、移除链表元素
