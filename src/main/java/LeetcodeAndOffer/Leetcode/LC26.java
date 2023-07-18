@@ -21,4 +21,17 @@ public class LC26 {
         return slow;
 
     }
+
+    //第二版
+    public int removeDuplicates_second(int[] nums) {
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if (fast==0||nums[fast]!=nums[fast-1]){
+                nums[slow]=nums[fast];
+                slow++;
+            }
+        }
+        return slow;
+    }
+
 }
