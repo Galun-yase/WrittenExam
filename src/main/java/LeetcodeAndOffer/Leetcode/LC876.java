@@ -13,6 +13,17 @@ public class LC876 {
         return slow;
     }
 
+    public ListNode middleNode_second(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        return slow;
+    }
+
     class ListNode {
         int val;
         ListNode next;

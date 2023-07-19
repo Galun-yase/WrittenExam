@@ -15,6 +15,17 @@ public class LC206 {
         return cur;
     }
 
+    public ListNode reverseList_second(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode cur = reverseList_second(head.next);
+
+        head.next.next = head;
+        head.next = null;
+
+        return cur;
+    }
+
     static class ListNode {
         int val;
         ListNode next;
