@@ -48,6 +48,17 @@ public class LC160 {
 
     }
 
+    public ListNode getIntersectionNode_second(ListNode headA, ListNode headB) {
+        ListNode pointA = headA;
+        ListNode pointB = headB;
+        while (pointA != pointB) {
+            // 注意pointA == null而非pointA.next == null,否则会发生无限循环
+            pointA = pointA == null ? headB : pointA.next;
+            pointB = pointB == null ? headA : pointB.next;
+
+        }
+        return pointA;
+    }
 
     class ListNode {
         int val;

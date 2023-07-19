@@ -27,6 +27,23 @@ public class LC203 {
 
     }
 
+    public ListNode removeElements_second(ListNode head, int val) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode slow = dummy;
+        ListNode fast = head;
+        while (fast != null) {
+            if (fast.val == val) {
+                slow.next = fast.next;
+            } else {
+                slow = slow.next;
+            }
+            fast = fast.next;
+        }
+        return dummy.next;
+    }
+
     static class ListNode {
         int val;
         ListNode next;
