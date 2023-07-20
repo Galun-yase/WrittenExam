@@ -17,22 +17,54 @@ public class LC150 {
             if (Objects.equals(str, "-")) {
                 Integer v1 = stack.pop();
                 Integer v2 = stack.pop();
-                stack.push(v2-v1);
+                stack.push(v2 - v1);
                 continue;
             }
             if (Objects.equals(str, "*")) {
                 Integer v1 = stack.pop();
                 Integer v2 = stack.pop();
-                stack.push(v2*v1);
+                stack.push(v2 * v1);
                 continue;
             }
             if (Objects.equals(str, "/")) {
                 Integer v1 = stack.pop();
                 Integer v2 = stack.pop();
-                stack.push(v2/v1);
+                stack.push(v2 / v1);
                 continue;
             }
             stack.push(Integer.parseInt(str));
+        }
+        return stack.pop();
+    }
+
+    public int evalRPN_second(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for (String s : tokens) {
+            if (Objects.equals(s, "+")) {
+                Integer num1 = stack.pop();
+                Integer num2 = stack.pop();
+                stack.push(num1 + num2);
+                continue;
+            }
+            if (Objects.equals(s, "-")) {
+                Integer num1 = stack.pop();
+                Integer num2 = stack.pop();
+                stack.push(num2 - num1);
+                continue;
+            }
+            if (Objects.equals(s, "*")) {
+                Integer num1 = stack.pop();
+                Integer num2 = stack.pop();
+                stack.push(num1 * num2);
+                continue;
+            }
+            if (Objects.equals(s, "/")) {
+                Integer num1 = stack.pop();
+                Integer num2 = stack.pop();
+                stack.push(num2 / num1);
+                continue;
+            }
+            stack.push(Integer.parseInt(s));
         }
         return stack.pop();
     }
@@ -42,7 +74,7 @@ public class LC150 {
         String b = "a";
 
 
-        System.out.println(a==b);
+        System.out.println(a == b);
 
     }
 

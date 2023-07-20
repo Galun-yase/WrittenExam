@@ -41,4 +41,31 @@ public class LC20 {
 
     }
 
+    public boolean isValid_second(String s) {
+        Stack<Character> stack = new Stack<>();
+        char[] charArray = s.toCharArray();
+
+        for (char c : charArray) {
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+                continue;
+            }
+
+            if (stack.isEmpty()) {
+                return false;
+            }
+
+            if (c == ')' && stack.peek() == '(') {
+                stack.pop();
+            } else if (c == '}' && stack.peek() == '{') {
+                stack.pop();
+            } else if (c == ']' && stack.peek() == '[') {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
 }
