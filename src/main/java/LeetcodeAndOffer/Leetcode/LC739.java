@@ -21,4 +21,25 @@ public class LC739 {
         return res;
     }
 
+    public int[] dailyTemperatures_second(int[] temperatures) {
+        // 构建一个单调递增栈，保存下标
+        Stack<Integer> stack = new Stack<>();
+
+        int[] res = new int[temperatures.length];
+
+        for (int i = temperatures.length - 1; i >= 0; i--) {
+            int temperature = temperatures[i];
+            while (!stack.isEmpty() && temperatures[stack.peek()] <= temperature) {
+                stack.pop();
+            }
+
+            if (stack.isEmpty()) {
+                res[i] = 0;
+            } else {
+                res[i] = stack.peek() - i;
+            }
+            stack.push(i);
+        }
+        return res;
+    }
 }
