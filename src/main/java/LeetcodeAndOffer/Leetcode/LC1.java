@@ -17,4 +17,23 @@ public class LC1 {
         }
         return null;
     }
+
+    public int[] twoSum_second(int[] nums, int target) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            hashMap.put(nums[i], i);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int key = target - nums[i];
+            Integer index = hashMap.get(key);
+
+            //注意同一个坐标不能出现两次，但是可以出现不同坐标的相同数字
+            if (index != null && index != i) {
+                return new int[]{i, index};
+            }
+        }
+        return null;
+    }
 }

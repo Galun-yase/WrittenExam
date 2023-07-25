@@ -11,4 +11,13 @@ public class LC217 {
         }
         return false;
     }
+
+    public boolean containsDuplicate_second(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int num : nums) {
+            if (!set.add(num)) return true;
+        }
+        return false;
+    }
 }
