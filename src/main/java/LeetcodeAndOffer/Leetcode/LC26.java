@@ -34,4 +34,30 @@ public class LC26 {
         return slow;
     }
 
+    public int removeDuplicates_third(int[] nums) {
+        if (nums == null) return 0;
+        if (nums.length <= 1) return nums.length;
+        int cur = 0;
+        int index = 1;
+
+        while (index != nums.length) {
+            if (nums[cur] != nums[index]) {
+                cur++;
+                nums[cur] = nums[index];
+            }
+            index++;
+        }
+        return cur + 1;
+    }
+
+    public int removeDuplicates_forth(int[] nums) {
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if (slow == 0 || nums[fast] != nums[slow - 1]) {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+        }
+        return slow;
+    }
 }
