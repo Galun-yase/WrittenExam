@@ -28,6 +28,28 @@ public class LC142 {
         return null;
     }
 
+    public ListNode detectCycle_second(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        do {
+            if (fast == null || fast.next == null) return null;
+
+            fast = fast.next.next;
+            slow = slow.next;
+
+        } while (fast != slow);
+
+        ListNode nodeX = head;
+        ListNode nodeY = fast;
+
+        while (nodeX != nodeY) {
+            nodeX = nodeX.next;
+            nodeY = nodeY.next;
+        }
+
+        return nodeX;
+    }
+
 
     static class ListNode {
         int val;
