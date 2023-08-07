@@ -23,6 +23,26 @@ public class LC260 {
         return new int[]{a, b};
     }
 
+    public int[] singleNumber_second(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum ^= num;
+        }
+
+        int k = Integer.lowestOneBit(sum);
+        int a = 0;
+        int b = 0;
+
+        for (int num : nums) {
+
+            if ((k & num) == 0) {
+                a ^= num;
+            } else {
+                b ^= num;
+            }
+        }
+        return new int[]{a, b};
+    }
 
     public static void main(String[] args) {
 //        System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));

@@ -33,8 +33,22 @@ public class LC137 {
 
     }
 
+    public int singleNumber_second(int[] nums) {
+        int res = 0;
+        for (int i = 0; i < 31; i++) {
+            int total = 0;
+            for (int num : nums) {
+                total += (num >> i )& 1;
+            }
+            if (total % 3 != 0) {
+                res |= 1 << i;
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        int[] a = {2,2,2,3};
+        int[] a = {2, 2, 2, 3};
         int i = new LC137().singleNumber(a);
     }
 
