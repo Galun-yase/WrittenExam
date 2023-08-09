@@ -1,0 +1,17 @@
+package LeetcodeAndOffer.Leetcode;
+
+public class LC50 {
+    public double myPow(double x, int n) {
+        if (n == 0) {
+            return 1.0;
+        } else if ((n & 1) == 0) {
+            return myPow(x * x, n / 2);
+        } else {
+            if (n > 0) {
+                return myPow(x * x, n / 2) * x;
+            } else {
+                return myPow(x * x, n / 2) * (1.0 / x);
+            }
+        }
+    }
+}
