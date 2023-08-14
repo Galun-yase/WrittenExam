@@ -21,6 +21,23 @@ public class LC82 {
         return dummy.next;
     }
 
+    public ListNode deleteDuplicates_recursion(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        if (head.val != head.next.val) {
+            ListNode newNode = deleteDuplicates_recursion(head.next);
+            head.next = newNode;
+            return head;
+        } else {
+            int val = head.val;
+
+            while (head.next != null && head.next.val == val) {
+                head = head.next;
+            }
+            return deleteDuplicates_recursion(head.next);
+        }
+    }
+
 
     class ListNode {
         int val;

@@ -26,6 +26,15 @@ public class LC206 {
         return cur;
     }
 
+    public ListNode reverseList_third(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode newNode = reverseList_third(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newNode;
+    }
+
     static class ListNode {
         int val;
         ListNode next;
