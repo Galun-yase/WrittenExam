@@ -1,5 +1,7 @@
 package Sort;
 
+import java.util.Arrays;
+
 public class MergeSort {
 
     //归并排序 时间复杂度O(nlogn) 空间复杂度O(n)
@@ -39,5 +41,55 @@ public class MergeSort {
             seqList[left++]=tempList[t++];
         }
 
+    }
+
+    private static void mergeSort_second(int[] seqList, int left, int right) {
+        if (left >= right) return;
+
+        int mid = (left + right) / 2;
+        mergeSort(seqList, left, mid);
+        mergeSort(seqList, mid + 1, right);
+        merge(seqList, left, mid, right);
+    }
+
+    private static void mergeTwoArray(int[] seqList, int start, int mid, int end) {
+        int[] tmp = new int[seqList.length];
+        int left = start;
+        int right = mid + 1;
+        int index = 0;
+
+        while (left <= mid && right <= end) {
+            if (seqList[left] <= seqList[right]) {
+                tmp[index] = seqList[left];
+                left++;
+            } else {
+                tmp[index] = seqList[right];
+                right++;
+            }
+            index++;
+        }
+
+        while (left <= mid) {
+            tmp[index] = seqList[left];
+            index++;
+            left++;
+        }
+
+        while (right <= end) {
+            tmp[index] = seqList[right];
+            index++;
+            right++;
+        }
+
+        for (int i = start; i <= end; i++) {
+            seqList[i] = tmp[i];
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 1, 4, 6, 7, 4, 2, 3, 8, 4, 8, 2};
+        //quickSort_second(arr,0, arr.length-1);
+        mergeSort_second(arr, 0, arr.length - 1);
+        Arrays.stream(arr).forEach(System.out::println);
     }
 }

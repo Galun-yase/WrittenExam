@@ -1,5 +1,7 @@
 package Sort;
 
+import java.util.Arrays;
+
 public class ExchangeSort {
 
     //冒泡排序 时间复杂度O(n2) 空间复杂度O(1)
@@ -49,5 +51,52 @@ public class ExchangeSort {
         int temp=seqList[index1];
         seqList[index1]=seqList[index2];
         seqList[index2]=temp;
+    }
+
+    private static void bubbleSort_second(int[] seqList) {
+        for (int i = 0; i < seqList.length; i++) {
+            boolean flag = true;
+            for (int j = 0; j < seqList.length - 1 - i; j++) {
+                if (seqList[j] > seqList[j + 1]) {
+                    swap(seqList, j, j + 1);
+                    flag = false;
+                }
+            }
+            if (flag) break;
+        }
+    }
+
+    private static void quickSort_second(int[] seqList, int left, int right) {
+        if (left >= right) return;
+
+        int mid = partition_second(seqList, left, right);
+        quickSort(seqList, left, mid - 1);
+        quickSort(seqList, mid + 1, right);
+    }
+
+    private static int partition_second(int[] seqList, int left, int right) {
+        int pivot = seqList[left];
+
+        while (left < right) {
+            while (left < right && pivot <= seqList[right]) {
+                right--;
+            }
+            seqList[left] = seqList[right];
+
+            while (left < right && seqList[left] <= pivot) {
+                left++;
+            }
+            seqList[right] = seqList[left];
+        }
+        seqList[left] = pivot;
+        // seqList[right]=pivot;
+        return left;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 1, 4, 6, 7, 4, 2, 3, 8, 4, 8, 2};
+        //quickSort_second(arr,0, arr.length-1);
+        bubbleSort_second(arr);
+        Arrays.stream(arr).forEach(System.out::println);
     }
 }
