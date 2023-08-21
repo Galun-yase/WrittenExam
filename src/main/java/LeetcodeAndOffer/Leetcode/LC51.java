@@ -92,6 +92,71 @@ public class LC51 {
         }
     }
 
+    public List<List<String>> solveNQueens_second(int n) {
+        List<List<String>> res = new ArrayList<>();
+
+        char[][] queue = new char[n][n];
+        for (char[] q : queue) {
+            Arrays.fill(q, '.');
+        }
+
+        boolean[][] attack = new boolean[n][n];
+        for (boolean[] a : attack) {
+            Arrays.fill(a, false);
+        }
+
+        backtrack_second(n, 0, attack, queue, res);
+
+        return res;
+    }
+
+    private void backtrack_second(int n, int k, boolean[][] attack, char[][] queue, List<List<String>> res) {
+        if (k == n) {
+            ArrayList<String> list = new ArrayList<>();
+            for (char[] q : queue) {
+                list.add(String.copyValueOf(q));
+            }
+            res.add(list);
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (attack[k][i]) continue;
+
+            boolean[][] temp = new boolean[attack.length][attack[0].length];
+            for (int j = 0; j < temp.length; j++) {
+                for (int l = 0; l < temp[0].length; l++) {
+                    temp[j][l] = attack[j][l];
+                }
+            }
+
+            queue[k][i] = 'Q';
+            updateAttack_second(attack, k, i);
+            backtrack_second(n, k + 1, attack, queue, res);
+            attack = temp;
+            queue[k][i] = '.';
+        }
+    }
+
+    private void updateAttack_second(boolean[][] attack, int x, int y) {
+        attack[x][y] = true;
+
+        int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+        for (int i = 1; i < attack.length; i++) {
+            for (int j = 0; j < 8; j++) {
+                int nx = x + i * dx[j];
+                int ny = y + i * dy[j];
+
+                if (nx >= 0 && ny >= 0 && nx < attack.length && ny < attack[0].length) {
+                    attack[nx][ny] = true;
+                }
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         List<List<String>> lists = new LC51().solveNQueens(4);
         System.out.println(lists);
