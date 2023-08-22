@@ -145,6 +145,39 @@ public class LC200 {
     }
 
 
+    public int numIslands_second(char[][] grid) {
+        int[][] mark = new int[grid.length][grid[0].length];
+        int count = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1' && mark[i][j] == 0) {
+                    dfs_second(grid, mark, i, j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private void dfs_second(char[][] grid, int[][] mark, int x, int y) {
+        mark[x][y] = 1;
+
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, 1, 0, -1};
+
+        for (int i = 0; i < 4; i++) {
+            int newX = x + dx[i];
+            int newY = y + dy[i];
+
+            if (newX >= 0 && newY >= 0 && newX < grid.length &&
+                    newY < grid[0].length && grid[newX][newY] == '1' && mark[newX][newY] == 0) {
+                dfs_second(grid, mark, newX, newY);
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
 
         char[][] ints = new char[][]{{'1', '1', '0', '0', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '1', '0', '0'}, {'0', '0', '0', '1', '1'}};
