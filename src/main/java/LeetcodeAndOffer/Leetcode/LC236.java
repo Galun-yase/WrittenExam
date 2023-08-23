@@ -23,6 +23,45 @@ public class LC236 {
         }
     }
 
+    public TreeNode lowestCommonAncestor_second(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return null;
+        if (root == p) return p;
+        if (root == q) return q;
+
+        TreeNode left = lowestCommonAncestor_second(root.left, p, q);
+        TreeNode right = lowestCommonAncestor_second(root.right, p, q);
+
+        if (left == null && right == null) {
+            return null;
+        } else if (left == null) {
+            return right;
+        } else if (right == null) {
+            return left;
+        } else {
+            return root;
+        }
+    }
+
+    public TreeNode lowestCommonAncestor_third(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return null;
+        if (root == p) return p;
+        if (root == q) return q;
+
+        TreeNode left = lowestCommonAncestor_third(root.left, p, q);
+        TreeNode right = lowestCommonAncestor_third(root.right, p, q);
+
+        if (left == null && right == null) {
+            return null;
+        } else if (left == null) {
+            return right;
+        } else if (right == null) {
+            return left;
+        } else {
+            return root;
+        }
+    }
+
+
     public TreeNode lowestCommonAncestor_z(TreeNode root, TreeNode p, TreeNode q) {
         if (root.val == p.val || root.val == q.val) return root;
         if (isInTree(root.left, p.val) && isInTree(root.left, q.val)) {
