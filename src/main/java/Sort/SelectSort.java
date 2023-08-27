@@ -2,7 +2,7 @@ package Sort;
 
 import java.util.Arrays;
 
-public class SelectSort {
+public class  SelectSort {
 
     //直接选择排序 时间复杂度O(n2) 空间复杂度O(1)
     public static void starightSelectSort(int[] seqList){
@@ -62,5 +62,57 @@ public class SelectSort {
         int temp=seqList[index1];
         seqList[index1]=seqList[index2];
         seqList[index2]=temp;
+    }
+
+    private void heapSort_second(int[] arr) {
+        // 先需要遍历构建大顶堆
+        // 从最后一个非叶子节点从下至上调整
+        for (int i = arr.length / 2 - 1; i >= 0; i--) {
+            adjustHeap_second(arr, i, arr.length);
+        }
+
+        // 调整的时候，只需要从被交换的根节点调整
+        for (int i = arr.length - 1; i > 0; i--) {
+            swap_second(arr, 0, i);
+            adjustHeap_second(arr, 0, i);
+        }
+    }
+
+    private void adjustHeap_second(int[] arr, int parent, int length) {
+        int tmp = arr[parent];
+        int child = parent * 2 + 1;
+
+        while (child < length) {
+            if (child + 1 < length && arr[child] < arr[child + 1]) {
+                child++;
+            }
+
+            // 此处构建大顶堆，小顶堆则parent小于左右节点最小值时，跳出循环
+            if (tmp > arr[child]) break;
+
+            arr[parent] = arr[child];
+            parent = child;
+            child = parent * 2 + 1;
+        }
+        arr[parent] = tmp;
+    }
+
+    private void swap_second(int[] arr, int a, int b) {
+        int tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1,3,9,6,5,4,7,2,8};
+
+        // 打印排序前的数组
+        System.out.println(Arrays.toString(arr));
+
+        // 执行堆排序操作
+        new SelectSort().heapSort_second(arr);
+
+        // 打印排序后的数组
+        System.out.println(Arrays.toString(arr));
     }
 }

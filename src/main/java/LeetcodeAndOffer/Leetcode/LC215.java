@@ -1,6 +1,7 @@
 package LeetcodeAndOffer.Leetcode;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class LC215 {
     public int findKthLargest(int[] nums, int k) {
@@ -36,5 +37,28 @@ public class LC215 {
         }
         nums[left] = pivot;
         return left;
+    }
+
+    public int findKthLargest_second(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int i = 0; i < k; i++) {
+            pq.add(nums[i]);
+        }
+
+        for (int i = k; i < nums.length; i++) {
+            Integer top = pq.peek();
+            if (top < nums[i]) {
+                pq.poll();
+                pq.add(nums[i]);
+            }
+        }
+
+        return pq.peek();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 2, 1, 5, 6, 4};
+        new LC215().findKthLargest_second(arr, 2);
     }
 }
