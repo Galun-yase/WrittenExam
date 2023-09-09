@@ -177,6 +177,75 @@ public class LC200 {
         }
     }
 
+    public int numIslands_third(char[][] grid) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+
+        int[] dx = {1, 0};
+        int[] dy = {0, 1};
+
+        UnionFind_third unionFind = new UnionFind_third(rows * cols);
+
+        int water = 0;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == '0') {
+                    water++;
+                } else {
+                    for (int k = 0; k < 2; k++) {
+                        int newX = i + dx[k];
+                        int newY = j + dy[k];
+
+                        if (newX < rows && newY < cols && grid[newX][newY] == '1') {
+                            unionFind.union(getIndex_third(cols, i, j), getIndex_third(cols, newX, newY));
+                        }
+                    }
+                }
+            }
+        }
+        return unionFind.getCount() - water;
+    }
+
+    public int getIndex_third(int n, int i, int j) {
+        return n * i + j;
+    }
+
+    class UnionFind_third {
+
+        private int[] roots;
+        private int count;
+
+        UnionFind_third(int n) {
+            roots = new int[n];
+            for (int i = 0; i < n; i++) {
+                roots[i] = i;
+            }
+            count = n;
+        }
+
+        public int find(int i) {
+            if (roots[i] == i) return i;
+
+            roots[i] = find(roots[i]);
+            return roots[i];
+        }
+
+        public void union(int i, int j) {
+            int pRoot = find(i);
+            int qRoot = find(j);
+
+            if (pRoot != qRoot) {
+                roots[pRoot] = qRoot;
+                count--;
+            }
+        }
+
+        public int getCount() {
+            return count;
+        }
+    }
+
 
     public static void main(String[] args) {
 
