@@ -47,9 +47,9 @@ public class MergeSort {
         if (left >= right) return;
 
         int mid = (left + right) / 2;
-        mergeSort(seqList, left, mid);
-        mergeSort(seqList, mid + 1, right);
-        merge(seqList, left, mid, right);
+        mergeSort_second(seqList, left, mid);
+        mergeSort_second(seqList, mid + 1, right);
+        mergeTwoArray(seqList, left, mid, right);
     }
 
     private static void mergeTwoArray(int[] seqList, int start, int mid, int end) {
@@ -81,8 +81,10 @@ public class MergeSort {
             right++;
         }
 
-        for (int i = start; i <= end; i++) {
-            seqList[i] = tmp[i];
+        // 临时数组从第一个元素开始存储
+        index = 0;
+        while (start <= end) {
+            seqList[start++] = tmp[index++];
         }
     }
 
