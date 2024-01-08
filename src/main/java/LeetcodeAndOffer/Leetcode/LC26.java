@@ -60,4 +60,15 @@ public class LC26 {
         }
         return slow;
     }
+
+    public int removeDuplicates_5(int[] nums) {
+        int slow = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[slow] != nums[i]) {
+                slow++;
+                nums[slow] = nums[i];
+            }
+        }
+        return slow + 1;
+    }
 }
