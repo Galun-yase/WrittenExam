@@ -34,5 +34,21 @@ public class LC24 {
             this.next = next;
         }
     }
+
+    public ListNode swapPairs_2(ListNode head) {
+        ListNode pNode = new ListNode(-1, head);
+
+        ListNode p = pNode;
+        while (head != null && head.next != null) {
+            ListNode tmp = head.next;
+            p.next = tmp;
+            head.next = tmp.next;
+            tmp.next = head;
+
+            p = head;
+            head = head.next;
+        }
+        return pNode.next;
+    }
 }
 

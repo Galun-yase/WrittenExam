@@ -5,7 +5,7 @@ public class LC19 {
 
 
         ListNode dummy = new ListNode(-1);
-        dummy.next=head;
+        dummy.next = head;
 
         ListNode slow = dummy;
         ListNode fast = head;
@@ -19,7 +19,7 @@ public class LC19 {
             fast = fast.next;
             slow = slow.next;
         }
-        slow.next=slow.next.next;
+        slow.next = slow.next.next;
         return dummy.next;
     }
 
@@ -38,6 +38,31 @@ public class LC19 {
             this.val = val;
             this.next = next;
         }
+    }
+
+    public ListNode removeNthFromEnd_2(ListNode head, int n) {
+        ListNode dummy = new ListNode(-1, head);
+
+        ListNode fast = head;
+        ListNode slow = dummy;
+        for (int i = 0; i < n; i++) {
+            if (fast != null) {
+                fast = fast.next;
+            } else {
+                return null;
+            }
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        ListNode tmp = slow.next;
+        slow.next = tmp.next;
+        tmp.next = null;
+
+        return dummy.next;
     }
 }
 

@@ -69,5 +69,15 @@ public class LC160 {
             next = null;
         }
     }
+
+    public ListNode getIntersectionNode_3(ListNode headA, ListNode headB) {
+        ListNode nodeA = headA;
+        ListNode nodeB = headB;
+        while (nodeA != nodeB) {
+            nodeA = nodeA == null ? headB : nodeA.next;
+            nodeB = nodeB == null ? headA : nodeB.next;
+        }
+        return nodeA;
+    }
 }
 
