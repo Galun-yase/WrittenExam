@@ -62,6 +62,42 @@ public class LC155 {
         minStack.pop();
         System.out.println(minStack.getMin());
     }
+
+    static class MinStack2 {
+        Stack<Integer> stack;
+        Stack<Integer> min;
+
+        public MinStack2() {
+            stack = new Stack<>();
+            min = new Stack<>();
+        }
+
+        public void push(int val) {
+            if (stack.isEmpty()) {
+                min.push(val);
+            } else {
+                if (min.peek() < val) {
+                    min.push(min.peek());
+                } else {
+                    min.push(val);
+                }
+            }
+            stack.push(val);
+        }
+
+        public void pop() {
+            stack.pop();
+            min.pop();
+        }
+
+        public int top() {
+            return stack.peek();
+        }
+
+        public int getMin() {
+            return min.peek();
+        }
+    }
 }
 
 

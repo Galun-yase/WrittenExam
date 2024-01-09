@@ -78,4 +78,32 @@ public class LC150 {
 
     }
 
+    public int evalRPN_3(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+
+        for (String token : tokens) {
+            if (Objects.equals(token, "+")) {
+                Integer first = stack.pop();
+                Integer last = stack.pop();
+                stack.push(last + first);
+
+            } else if (Objects.equals(token, "-")) {
+                Integer first = stack.pop();
+                Integer last = stack.pop();
+                stack.push(last - first);
+            } else if (Objects.equals(token, "*")) {
+                Integer first = stack.pop();
+                Integer last = stack.pop();
+                stack.push(last * first);
+            } else if (Objects.equals(token, "/")) {
+                Integer first = stack.pop();
+                Integer last = stack.pop();
+                stack.push(last / first);
+            } else {
+                stack.push(Integer.parseInt(token));
+            }
+        }
+        return stack.pop();
+    }
+
 }
