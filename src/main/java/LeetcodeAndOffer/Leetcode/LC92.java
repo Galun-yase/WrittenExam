@@ -46,4 +46,29 @@ public class LC92 {
             this.next = next;
         }
     }
+
+    public ListNode reverseBetween_2(ListNode head, int left, int right) {
+        if (head == null) return head;
+
+        if (1 != left) {
+            head.next = reverseBetween_2(head.next, left - 1, right - 1);
+            return head;
+        }
+
+        int index = left;
+
+        ListNode cur = head;
+        ListNode next = cur.next;
+        while (index != right) {
+            ListNode pre = cur;
+            cur = next;
+            next = next.next;
+            cur.next = pre;
+
+            index++;
+        }
+        head.next = next;
+
+        return cur;
+    }
 }

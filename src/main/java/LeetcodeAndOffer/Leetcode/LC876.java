@@ -17,9 +17,9 @@ public class LC876 {
         ListNode fast = head;
         ListNode slow = head;
 
-        while (fast!=null && fast.next!=null){
-            fast=fast.next.next;
-            slow=slow.next;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
         }
         return slow;
     }
@@ -39,6 +39,17 @@ public class LC876 {
             this.val = val;
             this.next = next;
         }
+    }
+
+    public ListNode middleNode_3(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 }
 

@@ -38,4 +38,25 @@ public class LC328 {
             this.next = next;
         }
     }
+
+    public ListNode oddEvenList_2(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode dummy = new ListNode(-1, head);
+        ListNode even = head.next;
+
+        ListNode p = head;
+        ListNode q = even;
+
+        while (q != null && q.next != null) {
+            p.next = q.next;
+            p = p.next;
+
+            q.next = p.next;
+            q = q.next;
+        }
+
+        p.next = even;
+        return dummy.next;
+    }
 }

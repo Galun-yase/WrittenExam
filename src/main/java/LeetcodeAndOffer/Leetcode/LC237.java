@@ -15,4 +15,9 @@ public class LC237 {
             val = x;
         }
     }
+
+    public void deleteNode_2(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
 }
