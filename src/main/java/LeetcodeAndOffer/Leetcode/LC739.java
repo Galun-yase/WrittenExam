@@ -42,4 +42,25 @@ public class LC739 {
         }
         return res;
     }
+
+    public int[] dailyTemperatures_3(int[] temperatures) {
+        Stack<Integer> stack = new Stack<>();
+        int[] res = new int[temperatures.length];
+
+        for (int i = 0; i < temperatures.length; i++) {
+            int temperature = temperatures[i];
+
+            if (stack.isEmpty()) {
+                stack.push(i);
+            } else {
+                while (!stack.isEmpty() && temperatures[stack.peek()] < temperature) {
+                    Integer t = stack.pop();
+                    int dis = i - t;
+                    res[t] = dis;
+                }
+                stack.push(i);
+            }
+        }
+        return res;
+    }
 }

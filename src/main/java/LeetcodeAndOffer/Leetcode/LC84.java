@@ -34,4 +34,57 @@ public class LC84 {
         }
         return res;
     }
+
+    public int largestRectangleArea_2(int[] heights) {
+        int[] left = new int[heights.length + 2];
+        int[] right = new int[heights.length + 2];
+
+
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < heights.length; i++) {
+            int height = heights[i];
+
+            if (stack.isEmpty()) {
+                stack.push(i);
+            } else {
+                while (!stack.isEmpty() && heights[stack.peek()] > height) {
+                    Integer pop = stack.pop();
+
+                    right[pop + 1] = i + 1;
+                }
+                stack.push(i);
+            }
+        }
+        while (!stack.isEmpty()) {
+            Integer pop = stack.pop();
+            right[pop + 1] = right.length - 1;
+        }
+
+        stack.clear();
+        for (int i = heights.length - 1; i >= 0; i--) {
+            int height = heights[i];
+
+            if (stack.isEmpty()) {
+                stack.push(i);
+            } else {
+                while (!stack.isEmpty() && heights[stack.peek()] > height) {
+                    Integer pop = stack.pop();
+
+                    left[pop + 1] = i + 1;
+                }
+                stack.push(i);
+            }
+        }
+
+        int res = 0;
+        for (int i = 0; i < heights.length; i++) {
+            res = Math.max(res, heights[i] * (right[i + 1] - left[i + 1] - 1));
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {2, 4};
+        int i = new LC84().largestRectangleArea_2(a);
+    }
 }

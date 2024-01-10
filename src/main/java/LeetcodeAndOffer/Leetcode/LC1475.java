@@ -26,4 +26,31 @@ public class LC1475 {
         }
         return res;
     }
+
+    public int[] finalPrices_2(int[] prices) {
+        Stack<Integer> stack = new Stack<>();
+
+        int[] res = new int[prices.length];
+
+        for (int i = 0; i < prices.length; i++) {
+            int price = prices[i];
+
+            if (stack.isEmpty()) {
+                stack.push(i);
+            } else {
+                while (!stack.isEmpty() && prices[stack.peek()] >= price) {
+                    res[stack.peek()] = prices[stack.peek()] - price;
+                    stack.pop();
+                }
+
+                stack.push(i);
+            }
+        }
+        while (!stack.isEmpty()) {
+            Integer index = stack.pop();
+            res[index] = prices[index];
+        }
+
+        return res;
+    }
 }
