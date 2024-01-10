@@ -39,4 +39,38 @@ public class LC394 {
         }
         return res.toString();
     }
+
+    public String decodeString_2(String s) {
+        Stack<Integer> numberStack = new Stack<>();
+        Stack<StringBuilder> strStack = new Stack<>();
+
+        StringBuilder sb = new StringBuilder();
+        int num = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if ('0' <= c && c <= '9') {
+                num = num * 10 + Character.digit(c, 10);
+            } else if (Character.isLowerCase(c)) {
+                sb.append(c);
+            } else if (c == '[') {
+                numberStack.push(num);
+                strStack.push(sb);
+
+                num = 0;
+                sb = new StringBuilder();
+            } else if (c == ']') {
+                Integer k = numberStack.pop();
+                StringBuilder str = strStack.pop();
+
+                for (int j = 0; j < k; j++) {
+                    str.append(sb);
+                }
+
+                sb = str;
+            }
+        }
+        return sb.toString();
+    }
 }

@@ -55,4 +55,20 @@ public class LC82 {
             this.next = next;
         }
     }
+
+    public ListNode deleteDuplicates_3(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        if (head.val != head.next.val) {
+            head.next = deleteDuplicates_3(head.next);
+            return head;
+        } else {
+            ListNode tmp = head;
+
+            while (tmp != null && tmp.val == head.val) {
+                tmp = tmp.next;
+            }
+            return deleteDuplicates_3(tmp);
+        }
+    }
 }

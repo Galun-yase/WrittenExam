@@ -48,4 +48,47 @@ public class LC2 {
             this.next = next;
         }
     }
+
+    public ListNode addTwoNumbers_2(ListNode l1, ListNode l2) {
+        if (l1 == null && l2 == null) return new ListNode(0);
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+
+        int index = 0;
+        while (l1 != null && l2 != null) {
+            int i = l1.val + l2.val + index;
+            pre.next = new ListNode(i % 10);
+            index = i / 10;
+
+            pre = pre.next;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+
+        while (l1 != null) {
+            int i = l1.val + index;
+            pre.next = new ListNode(i % 10);
+            index = i / 10;
+
+            pre = pre.next;
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            int i = l2.val + index;
+            pre.next = new ListNode(i % 10);
+            index = i / 10;
+
+            pre = pre.next;
+            l2 = l2.next;
+        }
+
+        if (index > 0) {
+            pre.next = new ListNode(index);
+        }
+
+        return dummy.next;
+    }
 }

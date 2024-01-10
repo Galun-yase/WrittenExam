@@ -44,4 +44,39 @@ public class LC224 {
         return res;
     }
 
+    public int calculate_2(String s) {
+        Stack<Integer> stack = new Stack<>();
+
+        int res = 0;
+        int sign = 1;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (Character.isDigit(c)) {
+                int value = c - '0';
+                while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
+                    i++;
+                    value = value * 10 + (s.charAt(i) - '0');
+                }
+                res += value * sign;
+            } else if (c == '+') {
+                sign = 1;
+            } else if (c == '-') {
+                sign = -1;
+            } else if (c == '(') {
+                stack.push(res);
+                stack.push(sign);
+
+                res = 0;
+                sign = 1;
+            } else if (c == ')') {
+                Integer popSign = stack.pop();
+                Integer popRes = stack.pop();
+
+                res = popSign * res + popRes;
+            }
+        }
+        return res;
+    }
 }

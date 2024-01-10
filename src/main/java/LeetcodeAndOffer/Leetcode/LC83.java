@@ -32,4 +32,28 @@ public class LC83 {
             this.next = next;
         }
     }
+
+    public ListNode deleteDuplicates_2(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode dummy = new ListNode(-101, head);
+        ListNode pre = dummy;
+        ListNode cur = head;
+
+        while (cur != null) {
+            while (cur != null && cur.val == pre.val) {
+                cur = cur.next;
+            }
+
+            if (cur == null) {
+                pre.next = cur;
+                break;
+            }
+
+            pre.next = cur;
+            cur = cur.next;
+            pre = pre.next;
+        }
+        return dummy.next;
+    }
 }

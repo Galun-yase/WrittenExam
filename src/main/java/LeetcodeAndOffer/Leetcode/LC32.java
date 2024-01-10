@@ -36,4 +36,30 @@ public class LC32 {
         int i = new LC32().longestValidParentheses("(())");
         System.out.println(i);
     }
+
+    public int longestValidParentheses_2(String s) {
+        Stack<Integer> stack = new Stack<>();
+        int start = 0;
+
+        int maxLength = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                stack.push(i);
+            } else {
+                if (stack.isEmpty()) {
+                    start = i + 1;
+                } else {
+                    stack.pop();
+                    if (stack.isEmpty()) {
+                        maxLength = Math.max(maxLength, i - start + 1);
+                    } else {
+                        maxLength = Math.max(maxLength, i - (stack.peek() + 1) + 1);
+                    }
+                }
+            }
+        }
+        return maxLength;
+    }
 }
