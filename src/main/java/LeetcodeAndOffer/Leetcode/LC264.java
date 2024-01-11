@@ -1,9 +1,6 @@
 package LeetcodeAndOffer.Leetcode;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 public class LC264 {
     public int nthUglyNumber(int n) {
@@ -58,6 +55,40 @@ public class LC264 {
     }
 
     public static void main(String[] args) {
-        new LC264().nthUglyNumber_second(10);
+        new LC264().nthUglyNumber_3(1407);
+    }
+
+    public int nthUglyNumber_3(int n) {
+        Queue<Long> queue = new PriorityQueue<>();
+        HashSet<Long> hashSet = new HashSet<>();
+        queue.offer(1L);
+        hashSet.add(1L);
+
+        int index = 0;
+        while (index < n-1) {
+            Long integer = queue.poll();
+
+            System.out.println(integer);
+
+            Long i = integer * 2;
+            Long j = integer * 3;
+            Long k = integer * 5;
+
+            if (!hashSet.contains(i)){
+                queue.offer(i);
+                hashSet.add(i);
+            }
+            if (!hashSet.contains(j)){
+                queue.offer(j);
+                hashSet.add(j);
+            }
+            if (!hashSet.contains(k)){
+                queue.offer(k);
+                hashSet.add(k);
+            }
+
+            index++;
+        }
+        return queue.poll().intValue();
     }
 }

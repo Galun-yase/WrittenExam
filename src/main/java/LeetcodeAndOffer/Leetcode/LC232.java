@@ -40,4 +40,41 @@ public class LC232 {
             return stackOut.isEmpty() && stackIn.isEmpty();
         }
     }
+
+    class MyQueue2 {
+
+        Stack<Integer> stack;
+        Stack<Integer> backStack;
+
+        public MyQueue2() {
+            stack = new Stack<>();
+            backStack = new Stack<>();
+        }
+
+        public void push(int x) {
+            backStack.push(x);
+        }
+
+        public int pop() {
+            if (stack.isEmpty()) {
+                while (!backStack.isEmpty()) {
+                    stack.push(backStack.pop());
+                }
+            }
+            return stack.pop();
+        }
+
+        public int peek() {
+            if (stack.isEmpty()) {
+                while (!backStack.isEmpty()) {
+                    stack.push(backStack.pop());
+                }
+            }
+            return stack.peek();
+        }
+
+        public boolean empty() {
+            return stack.isEmpty() && backStack.isEmpty();
+        }
+    }
 }
