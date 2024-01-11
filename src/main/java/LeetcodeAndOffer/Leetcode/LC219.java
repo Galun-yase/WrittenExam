@@ -15,4 +15,19 @@ public class LC219 {
         }
         return false;
     }
+
+    public boolean containsNearbyDuplicate_2(int[] nums, int k) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            if (hashMap.containsKey(num) && i - hashMap.get(num) <= k) {
+                return true;
+            }
+
+            hashMap.put(num, i);
+
+        }
+        return false;
+    }
 }

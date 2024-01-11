@@ -1,8 +1,6 @@
 package LeetcodeAndOffer.Leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LC349 {
@@ -18,5 +16,27 @@ public class LC349 {
         }
 
         return res.stream().mapToInt(a -> a).toArray();
+    }
+
+    public int[] intersection_2(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0; i < nums1.length; i++) {
+            hashMap.put(nums1[i], 0);
+        }
+
+        for (int num : nums2) {
+            if (hashMap.containsKey(num)) {
+                set.add(num);
+            }
+        }
+
+        int[] res = new int[set.size()];
+        List<Integer> list = new ArrayList<>(set);
+        for (int i = 0; i < list.size(); i++) {
+            res[i] = list.get(i);
+        }
+
+        return res;
     }
 }
