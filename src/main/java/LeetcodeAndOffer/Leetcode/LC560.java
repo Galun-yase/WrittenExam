@@ -21,4 +21,43 @@ public class LC560 {
         }
         return count;
     }
+
+    public int subarraySum_2(int[] nums, int k) {
+        int[] prefixSum = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
+
+        int res = 0;
+
+        for (int i = 1; i < nums.length + 1; i++) {
+            for (int j = 0; j < i; j++) {
+
+                if (prefixSum[i] - prefixSum[j] == k) res++;
+            }
+        }
+        return res;
+    }
+
+    public int subarraySum_3(int[] nums, int k) {
+        //前缀和为key出现的次数value
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        hashMap.put(0, 1);
+
+        int res = 0;
+        int prefixSum = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+
+            prefixSum += num;
+
+            if (hashMap.containsKey(prefixSum - k)) {
+                res += hashMap.get(prefixSum - k);
+            }
+
+            hashMap.put(prefixSum, hashMap.getOrDefault(prefixSum, 0) + 1);
+        }
+        return res;
+    }
 }
