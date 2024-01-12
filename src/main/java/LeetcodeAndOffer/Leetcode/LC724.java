@@ -32,4 +32,16 @@ public class LC724 {
         }
         return -1;
     }
+
+    public int pivotIndex_3(int[] nums) {
+        int[] prefixSum = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
+
+        for (int i = 0; i < prefixSum.length - 1; i++) {
+            if (prefixSum[i] == prefixSum[prefixSum.length - 1] - prefixSum[i + 1]) return i;
+        }
+        return -1;
+    }
 }

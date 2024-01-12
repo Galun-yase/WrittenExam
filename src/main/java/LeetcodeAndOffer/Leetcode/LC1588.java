@@ -20,4 +20,21 @@ public class LC1588 {
         }
         return res;
     }
+
+    public int sumOddLengthSubarrays_2(int[] arr) {
+        int res = 0;
+        int[] prefixSum = new int[arr.length + 1];
+
+        for (int i = 0; i < arr.length; i++) {
+            prefixSum[i + 1] = prefixSum[i] + arr[i];
+            res += arr[i];
+        }
+
+        for (int i = 3; i - 1 < arr.length; i += 2) {
+            for (int j = 0; i - 1 + j < arr.length; j++) {
+                res += prefixSum[i + j] - prefixSum[j];
+            }
+        }
+        return res;
+    }
 }

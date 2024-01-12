@@ -18,4 +18,21 @@ public class LC303 {
             return left == 0 ? prefixSum[right] : prefixSum[right] - prefixSum[left - 1];
         }
     }
+
+    class NumArray_2 {
+
+        int[] prefixSum;
+
+        public NumArray_2(int[] nums) {
+            prefixSum = new int[nums.length + 1];
+            for (int i = 0; i < nums.length; i++) {
+                prefixSum[i + 1] = prefixSum[i] + nums[i];
+            }
+        }
+
+        public int sumRange(int left, int right) {
+            return prefixSum[right + 1] - prefixSum[left];
+
+        }
+    }
 }
