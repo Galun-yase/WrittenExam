@@ -29,4 +29,25 @@ public class LC290 {
         }
         return true;
     }
+
+    public boolean wordPattern_2(String pattern, String s) {
+        String[] strings = s.split(" ");
+
+        if (pattern.length() != strings.length) return false;
+
+        HashMap<String, String> left = new HashMap<>();
+        HashMap<String, String> right = new HashMap<>();
+
+        for (int i = 0; i < pattern.length(); i++) {
+            String l = String.valueOf(pattern.charAt(i));
+            String r = strings[i];
+
+            if (left.containsKey(l)||right.containsKey(r)){
+                if (!Objects.equals(left.get(l), r) || !Objects.equals(right.get(r), l)) return false;
+            }
+            left.put(l, r);
+            right.put(r, l);
+        }
+        return true;
+    }
 }

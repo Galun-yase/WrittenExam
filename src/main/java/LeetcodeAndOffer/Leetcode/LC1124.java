@@ -6,6 +6,7 @@ import java.util.Map;
 public class LC1124 {
     /**
      * 有点复杂
+     *
      * @param hours
      * @return
      */
@@ -33,5 +34,32 @@ public class LC1124 {
             }
         }
         return ans;
+    }
+
+    public int longestWPI_2(int[] hours) {
+
+        int[] prefixSum = new int[hours.length + 1];
+
+        for (int i = 0; i < hours.length; i++) {
+            int hour = hours[i];
+            if (hour > 8) {
+                prefixSum[i + 1] = prefixSum[i] + 1;
+            } else {
+                prefixSum[i + 1] = prefixSum[i] - 1;
+            }
+        }
+
+
+        int res = 0;
+
+        for (int i = 1; i < prefixSum.length; i++) {
+            for (int j = 0; j < i; j++) {
+
+                if (prefixSum[i] - prefixSum[j] > 0) {
+                    res = Math.max(res, i - j);
+                }
+            }
+        }
+        return res;
     }
 }

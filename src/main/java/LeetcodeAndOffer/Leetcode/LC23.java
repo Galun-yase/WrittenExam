@@ -2,6 +2,7 @@ package LeetcodeAndOffer.Leetcode;
 
 import LeetCode.ListNode;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -104,5 +105,29 @@ public class LC23 {
             this.val = val;
             this.next = next;
         }
+    }
+
+    public ListNode mergeKLists_3(ListNode[] lists) {
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(Comparator.comparingInt(n -> n.val));
+
+        for (ListNode node : lists) {
+            if (node == null) continue;
+            queue.offer(node);
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+        while (!queue.isEmpty()) {
+            ListNode poll = queue.poll();
+
+            if (poll.next != null) {
+                queue.offer(poll.next);
+            }
+
+            pre.next = poll;
+            pre = poll;
+            poll.next = null;
+        }
+        return dummy.next;
     }
 }
