@@ -1,8 +1,6 @@
 package LeetcodeAndOffer.Leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class LC697 {
     public int findShortestSubArray(int[] nums) {
@@ -37,6 +35,42 @@ public class LC697 {
 
     public static void main(String[] args) {
         int[] ints = {1, 2, 2, 3, 1, 4, 2};
-        int shortestSubArray = new LC697().findShortestSubArray(ints);
+        int shortestSubArray = new LC697().findShortestSubArray_2(ints);
+    }
+
+    public int findShortestSubArray_2(int[] nums) {
+        // num:[count,start,end]
+        HashMap<Integer, ArrayList<Integer>> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+
+            if (hashMap.containsKey(num)) {
+                ArrayList<Integer> list = hashMap.get(num);
+                list.set(0, list.get(0) + 1);
+                list.set(2, i);
+            } else {
+                ArrayList<Integer> list = new ArrayList<>();
+                list.add(1);
+                list.add(i);
+                list.add(i);
+                hashMap.put(num, list);
+            }
+        }
+
+        int maxValue = 0;
+        int minRes = Integer.MAX_VALUE;
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : hashMap.entrySet()) {
+            Integer num = entry.getKey();
+            ArrayList<Integer> list = entry.getValue();
+
+            if (list.get(0) > maxValue) {
+                maxValue = list.get(0);
+                minRes = list.get(2) - list.get(1) + 1;
+            }
+            if (list.get(0) == maxValue) {
+                minRes = Math.min(minRes, list.get(2) - list.get(1) + 1);
+            }
+        }
+        return minRes;
     }
 }

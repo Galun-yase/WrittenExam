@@ -1,5 +1,7 @@
 package LeetcodeAndOffer.Leetcode;
 
+import javafx.scene.chart.ValueAxis;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -127,5 +129,100 @@ public class LC146 {
         protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
             return size() > this.capacity;
         }
+    }
+
+    static class LRUCache_2 {
+
+        class LRUNode {
+            int key;
+            int value;
+            LRUNode pre;
+            LRUNode next;
+
+            LRUNode(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+
+        }
+
+        int cap;
+        HashMap<Integer, LRUNode> map;
+        LRUNode head;
+        LRUNode tail;
+
+        public LRUCache_2(int capacity) {
+            cap = capacity;
+            map = new HashMap<>();
+            head = new LRUNode(-1, -1);
+            tail = new LRUNode(-1, -1);
+
+            head.next = tail;
+            tail.pre = head;
+        }
+
+        public int get(int key) {
+            if (!map.containsKey(key)) return -1;
+
+            LRUNode lruNode = map.get(key);
+
+            LRUNode pre = lruNode.pre;
+            LRUNode next = lruNode.next;
+
+            pre.next = next;
+            next.pre = pre;
+
+            lruNode.pre = null;
+            lruNode.next = null;
+
+            LRUNode tailPre = tail.pre;
+            tailPre.next = lruNode;
+            lruNode.pre = tailPre;
+
+            lruNode.next = tail;
+            tail.pre = lruNode;
+
+            return lruNode.value;
+        }
+
+        public void put(int key, int value) {
+            if (map.containsKey(key)) {
+                get(key);
+                tail.pre.value = value;
+            } else {
+                if (map.size() == cap) {
+                    LRUNode lruNode = head.next;
+                    head.next = lruNode.next;
+                    lruNode.next.pre = head;
+
+                    lruNode.pre = null;
+                    lruNode.next = null;
+
+                    map.remove(lruNode.key);
+
+                    put(key, value);
+                } else {
+                    LRUNode lruNode = new LRUNode(key, value);
+                    LRUNode taiPre = tail.pre;
+                    taiPre.next = lruNode;
+                    lruNode.pre = taiPre;
+
+                    tail.pre = lruNode;
+                    lruNode.next = tail;
+
+                    map.put(key, lruNode);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        LRUCache_2 lruCache2 = new LRUCache_2(2);
+        lruCache2.put(1, 1);
+        lruCache2.put(2, 2);
+        lruCache2.get(1);
+        lruCache2.put(3, 3);
+        lruCache2.get(2);
+
     }
 }

@@ -50,4 +50,31 @@ public class LC496 {
         int[] ints = new LC496().nextGreaterElement(ints1, ints2);
 
     }
+
+    public int[] nextGreaterElement_2(int[] nums1, int[] nums2) {
+
+        // 存储当前key的下一个最大元素value
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < nums2.length; i++) {
+            while (!stack.isEmpty() && stack.peek() < nums2[i]) {
+                Integer k = stack.pop();
+                hashMap.put(k, nums2[i]);
+            }
+            stack.push(nums2[i]);
+        }
+
+        while (!stack.isEmpty()) {
+            Integer k = stack.pop();
+            hashMap.put(k, -1);
+        }
+
+        int[] res = new int[nums1.length];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = hashMap.get(nums1[i]);
+        }
+        return res;
+    }
+
 }
