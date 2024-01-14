@@ -26,8 +26,8 @@ public class LC26 {
     public int removeDuplicates_second(int[] nums) {
         int slow = 0;
         for (int fast = 0; fast < nums.length; fast++) {
-            if (fast==0||nums[fast]!=nums[fast-1]){
-                nums[slow]=nums[fast];
+            if (fast == 0 || nums[fast] != nums[fast - 1]) {
+                nums[slow] = nums[fast];
                 slow++;
             }
         }
@@ -70,5 +70,17 @@ public class LC26 {
             }
         }
         return slow + 1;
+    }
+
+    public int removeDuplicates_6(int[] nums) {
+        int index = 0;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[index] != nums[i]) {
+                index++;
+                nums[index] = nums[i];
+            }
+        }
+        return index + 1;
     }
 }
