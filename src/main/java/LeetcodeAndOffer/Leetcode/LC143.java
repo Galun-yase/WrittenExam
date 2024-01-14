@@ -62,4 +62,29 @@ public class LC143 {
         }
     }
 
+    public void reorderList_2(ListNode head) {
+        reorder(head);
+    }
+
+    public ListNode reorder(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode pre = dummy;
+        ListNode cur = head;
+
+        while (cur.next != null) {
+            cur = cur.next;
+            pre = pre.next;
+        }
+
+        pre.next = null;
+
+        ListNode node = reorder(head.next);
+        head.next = cur;
+        cur.next = node;
+        return head;
+    }
 }
