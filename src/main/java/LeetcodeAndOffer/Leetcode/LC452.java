@@ -3,7 +3,9 @@ package LeetcodeAndOffer.Leetcode;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LC452 {
     public int findMinArrowShots_right(int[][] points) {
@@ -39,6 +41,28 @@ public class LC452 {
                 pos = point[1];
                 res++;
             }
+        }
+        return res;
+    }
+
+    public int findMinArrowShots_2(int[][] points) {
+
+        List<int[]> list = Arrays.stream(points).sorted(Comparator.comparing(array -> array[1])).collect(Collectors.toList());
+
+        int index = 0;
+        int res = 0;
+
+        while (index < points.length) {
+
+            int[] point = list.get(index);
+            int end = point[1];
+
+            while (index + 1 < points.length && list.get(index + 1)[0] <= end) {
+                index++;
+            }
+
+            res++;
+            index++;
         }
         return res;
     }

@@ -37,4 +37,37 @@ public class LC402 {
         }
         return stringBuilder.reverse().toString();
     }
+
+    public String removeKdigits_2(String num, int k) {
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < num.length(); i++) {
+            int n = num.charAt(i) - '0';
+
+            while (!stack.isEmpty() && k > 0 && stack.peek() > n) {
+                stack.pop();
+                k--;
+            }
+            stack.push(n);
+        }
+
+        while (!stack.isEmpty() && k > 0) {
+            stack.pop();
+            k--;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+
+        String string = sb.reverse().toString();
+
+        while (string.startsWith("0")) {
+            string = string.substring(1);
+        }
+        if (string.equals("")) return "0";
+
+        return string;
+    }
 }
