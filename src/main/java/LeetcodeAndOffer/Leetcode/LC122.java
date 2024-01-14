@@ -34,4 +34,12 @@ public class LC122 {
         return dp[length - 1][0];
     }
 
+    public int maxProfit_2(int[] prices) {
+        int res = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i + 1] > prices[i]) res += prices[i + 1] - prices[i];
+        }
+        return res;
+    }
+
 }

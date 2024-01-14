@@ -17,4 +17,19 @@ public class LC455 {
         }
         return child;
     }
+
+    public int findContentChildren_2(int[] g, int[] s) {
+        int[] arrayG = Arrays.stream(g).sorted().toArray();
+        int[] arrayS = Arrays.stream(s).sorted().toArray();
+
+        int index = 0;
+        for (int i = 0; i < arrayS.length; i++) {
+
+            if (index<arrayG.length && arrayG[index] <= arrayS[i]) {
+                index++;
+            }
+        }
+        return index;
+
+    }
 }
