@@ -31,4 +31,36 @@ public class LC16 {
         }
         return res;
     }
+
+    public int threeSumClosest_2(int[] nums, int target) {
+        Arrays.sort(nums);
+
+        int res = -100000;
+
+        for (int i = 0; i < nums.length - 2; i++) {
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == target) {
+                    return sum;
+                } else if (sum < target) {
+                    res = Math.abs(target - sum) < Math.abs(target - res) ? sum : res;
+                    left++;
+                } else {
+                    res = Math.abs(target - sum) < Math.abs(target - res) ? sum : res;
+                    right--;
+                }
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] ints = {4, 0, 5, -5, 3, 3, 0, -4, -5};
+        new LC16().threeSumClosest_2(ints, -2);
+    }
 }
