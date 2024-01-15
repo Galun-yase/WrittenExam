@@ -60,4 +60,23 @@ public class LC142 {
             next = null;
         }
     }
+
+    public ListNode detectCycle_3(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        do {
+            if (fast == null || fast.next == null) return null;
+            fast = fast.next.next;
+            slow = slow.next;
+        } while (fast != slow);
+
+        slow = head;
+
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
+    }
 }
