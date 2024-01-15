@@ -51,6 +51,17 @@ public class LC206 {
             this.next = next;
         }
     }
+
+    public ListNode reverseList_4(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode listNode = reverseList_4(head.next);
+
+        head.next.next = head;
+        head.next = null;
+
+        return listNode;
+    }
 }
 
 
