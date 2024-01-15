@@ -88,4 +88,55 @@ public class LC148 {
             this.next = next;
         }
     }
+
+    public ListNode sortList_2(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+
+        ListNode pre = new ListNode(-1, head);
+
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            pre = pre.next;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        pre.next = null;
+        ListNode h1 = sortList_2(head);
+        ListNode h2 = sortList_2(slow);
+        return merge(h1, h2);
+    }
+
+    private ListNode merge(ListNode left, ListNode right) {
+        if (left == null) return right;
+        if (right == null) return left;
+
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+        while (left != null && right != null) {
+            ListNode node = new ListNode();
+
+            if (left.val <= right.val) {
+                node.val = left.val;
+                left = left.next;
+            } else {
+                node.val = right.val;
+                right = right.next;
+            }
+
+            pre.next = node;
+            pre = pre.next;
+        }
+
+        if (left != null) {
+            pre.next = left;
+        }
+        if (right != null) {
+            pre.next = right;
+        }
+
+        return dummy.next;
+    }
 }

@@ -1,9 +1,6 @@
 package LeetcodeAndOffer.Leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LC56 {
     public int[][] merge(int[][] intervals) {
@@ -30,5 +27,36 @@ public class LC56 {
             }
         }
         return res.toArray(new int[res.size()][]);
+    }
+
+    public int[][] merge_2(int[][] intervals) {
+        if (intervals.length == 0 || intervals.length == 1) return intervals;
+
+        Arrays.sort(intervals, (a1, a2) -> {
+            if (a1[0] != a2[0]) {
+                return a1[0] - a2[0];
+            } else {
+                return a1[1] - a2[1];
+            }
+        });
+
+
+        LinkedList<int[]> linkedList = new LinkedList<>();
+        linkedList.add(intervals[0]);
+
+        for (int i = 1; i < intervals.length; i++) {
+            int[] last = linkedList.getLast();
+
+            int[] next = intervals[i];
+
+            if (last[1] >= next[0]) {
+                last[1] = Math.max(last[1], next[1]);
+            } else {
+                linkedList.add(next);
+            }
+        }
+
+        return linkedList.toArray(new int[0][]);
+
     }
 }
