@@ -28,4 +28,31 @@ public class LC134 {
         }
         return index;
     }
+
+    public int canCompleteCircuit_2(int[] gas, int[] cost) {
+        int gasCount = 0;
+        int costCount = 0;
+
+        for (int i = 0; i < gas.length; i++) {
+            gasCount += gas[i];
+            costCount += cost[i];
+        }
+        if (costCount > gasCount) return -1;
+
+
+        int index = 0;
+        gasCount = 0;
+        costCount = 0;
+        for (int i = 0; i < gas.length; i++) {
+            gasCount += gas[i];
+            costCount += cost[i];
+
+            if (costCount > gasCount) {
+                gasCount = 0;
+                costCount = 0;
+                index = i + 1;
+            }
+        }
+        return index;
+    }
 }

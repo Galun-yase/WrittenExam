@@ -33,4 +33,32 @@ public class LC135 {
         }
         return res;
     }
+
+    public int candy_2(int[] ratings) {
+        int[] left = new int[ratings.length];
+        int[] right = new int[ratings.length];
+
+        for (int i = 1; i < ratings.length; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                left[i] = left[i - 1] + 1;
+            }
+        }
+        for (int i = ratings.length - 1 - 1; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]) {
+                right[i] = right[i + 1] + 1;
+            }
+        }
+
+        int res = 0;
+        for (int i = 0; i < ratings.length; i++) {
+            res += Math.max(left[i], right[i]);
+        }
+
+        return res + ratings.length;
+    }
+
+    public static void main(String[] args) {
+        int[] r = {1, 0, 2};
+        new LC135().candy_2(r);
+    }
 }

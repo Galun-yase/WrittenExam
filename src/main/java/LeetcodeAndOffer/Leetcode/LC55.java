@@ -13,4 +13,16 @@ public class LC55 {
         }
         return false;
     }
+
+    public boolean canJump_2(int[] nums) {
+        int maxIndex = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            maxIndex = Math.max(maxIndex, i + num);
+            if (maxIndex == i && i != nums.length - 1) return false;
+        }
+
+        return maxIndex >= nums.length - 1;
+    }
 }
