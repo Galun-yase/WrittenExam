@@ -58,7 +58,45 @@ public class LC215 {
     }
 
     public static void main(String[] args) {
-        int[] arr = {3, 2, 1, 5, 6, 4};
-        new LC215().findKthLargest_second(arr, 2);
+        int[] arr = {3,2,3,1,2,4,5,5,6};
+        new LC215().findKthLargest_3(arr, 2);
+        System.out.println();
     }
+
+    public int findKthLargest_3(int[] nums, int k) {
+        return quickSort_3(nums, 0, nums.length - 1, k - 1);
+    }
+
+    private int quickSort_3(int[] arr, int left, int right, int k) {
+
+        int partition = partition_3(arr, left, right);
+
+        if (partition == k) {
+            return arr[partition];
+        } else if (partition < k) {
+            return quickSort_3(arr, partition + 1, right, k);
+        } else {
+            return quickSort_3(arr, left, partition - 1, k);
+        }
+    }
+
+    private int partition_3(int[] arr, int left, int right) {
+        int pivot = arr[left];
+
+        while (left < right) {
+            while (left < right && pivot >= arr[right]) {
+                right--;
+            }
+            arr[left] = arr[right];
+
+            while (left < right && arr[left] >= pivot) {
+                left++;
+            }
+            arr[right] = arr[left];
+        }
+
+        arr[left] = pivot;
+        return left;
+    }
+
 }
