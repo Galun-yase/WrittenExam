@@ -38,4 +38,37 @@ public class LC47 {
             path.remove(path.size() - 1);
         }
     }
+
+
+    public List<List<Integer>> permuteUnique_2(int[] nums) {
+        Arrays.sort(nums);
+
+        List<Integer> path = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        boolean[] used = new boolean[nums.length];
+
+        backtrack_2(nums, used, path, res);
+        return res;
+    }
+
+    private void backtrack_2(int[] nums, boolean[] used, List<Integer> path, List<List<Integer>> res) {
+        if (path.size() == nums.length) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) continue;
+            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) continue;
+
+            path.add(nums[i]);
+            used[i] = true;
+
+            backtrack_2(nums, used, path, res);
+
+            used[i] = false;
+            path.remove(path.size() - 1);
+        }
+    }
+
 }

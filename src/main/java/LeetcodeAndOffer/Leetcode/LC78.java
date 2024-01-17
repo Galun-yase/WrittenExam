@@ -26,4 +26,25 @@ public class LC78 {
             subset.remove(subset.size() - 1);
         }
     }
+
+    public List<List<Integer>> subsets_2(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<>();
+        List<Integer> subset = new ArrayList<>();
+
+        backtrack(nums, 0, subset, subsets);
+        return subsets;
+    }
+
+    void backtrack(int[] nums, int index, List<Integer> subset, List<List<Integer>> subsets) {
+        subsets.add(new ArrayList<>(subset));
+        if (index == nums.length) return;
+
+        for (int i = index; i < nums.length; i++) {
+            subset.add(nums[i]);
+            backtrack(nums, i + 1, subset, subsets);
+            subset.remove(subset.size() - 1);
+        }
+    }
+
+
 }
