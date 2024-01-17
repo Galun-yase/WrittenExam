@@ -26,4 +26,27 @@ public class LC77 {
             path.remove(path.size() - 1);
         }
     }
+
+    public List<List<Integer>> combine_2(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> sub = new ArrayList<>();
+
+        backtrack_2(n, 1, k, sub, res);
+        return res;
+    }
+
+    private void backtrack_2(int n, int index, int size, List<Integer> sub, List<List<Integer>> res) {
+        if (sub.size() == size) {
+            res.add(new ArrayList<>(sub));
+            return;
+        }
+        if (index > n) return;
+
+        for (int i = index; i <= n; i++) {
+
+            sub.add(i);
+            backtrack_2(n, i + 1, size, sub, res);
+            sub.remove(sub.size() - 1);
+        }
+    }
 }
