@@ -162,6 +162,64 @@ public class LC51 {
         System.out.println(lists);
     }
 
+    public List<List<String>> solveNQueens_3(int n) {
+        List<List<String>> res = new ArrayList<>();
+        List<char[]> path = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            char[] c = new char[n];
+            Arrays.fill(c, '.');
+            path.add(c);
+        }
+
+        boolean[][] attack = new boolean[n][n];
+
+        backtrack_3(n, 0, attack, path, res);
+        return res;
+    }
+
+    private void backtrack_3(int n, int row, boolean[][] attack, List<char[]> path, List<List<String>> res) {
+        if (row == n) {
+            ArrayList<String> list = new ArrayList<>();
+            for (char[] chars : path) {
+                list.add(new String(chars));
+            }
+            res.add(list);
+            return;
+        }
+
+
+        for (int i = 0; i < n; i++) {
+            if (checkAttack_3(attack, row, i)) {
+                continue;
+            }
+
+            path.get(row)[i] = 'Q';
+            attack[row][i] = true;
+            backtrack_3(n, row + 1, attack, path, res);
+            attack[row][i] = false;
+            path.get(row)[i] = '.';
+        }
+
+    }
+
+    private boolean checkAttack_3(boolean[][] attack, int x, int y) {
+        if (attack[x][y]) return true;
+
+        int[] dx = {-1, -1, -1, 0, 0, -1, 1, 1};
+        int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+        for (int j = 1; j < attack.length; j++) {
+            for (int i = 0; i < dx.length; i++) {
+                int newX = x + dx[i] * j;
+                int newY = y + dy[i] * j;
+
+                if (0 <= newX && newX < attack.length && 0 <= newY && newY < attack[0].length) {
+                    if (attack[newX][newY]) return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }
 

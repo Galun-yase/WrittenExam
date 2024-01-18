@@ -133,4 +133,45 @@ public class LC37 {
     private boolean testMask(int mask, int index) {
         return (mask & (1 << index)) == 0;
     }
+
+    public void solveSudoku_2(char[][] board) {
+        backtrack_2(board, 0, 0);
+    }
+
+    private boolean backtrack_2(char[][] board, int x, int y) {
+        if (x == board.length) return true;
+        if (y == board[0].length) return backtrack_2(board, x + 1, 0);
+        if (board[x][y] != '.') return backtrack_2(board, x, y + 1);
+
+
+        for (int k = 0; k < 9; k++) {
+            char c = (char) ('1' + k);
+            if (!isValid_2(board, x, y, c)) continue;
+
+            board[x][y] = c;
+            if (backtrack_2(board, x, y + 1)) return true;
+            board[x][y] = '.';
+        }
+
+        return false;
+    }
+
+    private boolean isValid_2(char[][] board, int x, int y, char c) {
+        for (int i = 0; i < 9; i++) {
+            if (board[x][i] == c || board[i][y] == c) return false;
+        }
+
+        int i = x / 3;
+        int j = y / 3;
+
+        for (int k = 0; k < 3; k++) {
+            for (int l = 0; l < 3; l++) {
+                int newX = i * 3 + k;
+                int newY = j * 3 + l;
+
+                if (board[newX][newY] == c) return false;
+            }
+        }
+        return true;
+    }
 }
