@@ -32,4 +32,16 @@ public class LC226 {
         }
     }
 
+    public TreeNode invertTree_2(TreeNode root) {
+        if (root == null) return root;
+
+        TreeNode left = invertTree_2(root.left);
+        TreeNode right = invertTree_2(root.right);
+
+        root.left = right;
+        root.right = left;
+
+        return root;
+    }
+
 }

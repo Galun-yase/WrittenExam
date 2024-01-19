@@ -41,4 +41,39 @@ public class LC654 {
             this.right = right;
         }
     }
+
+    public TreeNode constructMaximumBinaryTree_2(int[] nums) {
+        return construct_2(nums, 0, nums.length - 1);
+    }
+
+    private TreeNode construct_2(int[] nums, int left, int right) {
+        if (left > right) return null;
+
+        int res = -1;
+        for (int i = left; i <= right; i++) {
+            res = Math.max(res, nums[i]);
+        }
+
+        int index = -1;
+        for (int i = left; i <= right; i++) {
+            if (res == nums[i]) {
+                index = i;
+                break;
+            }
+        }
+
+        TreeNode root = new TreeNode(res);
+        TreeNode leftNode = construct_2(nums, left, index - 1);
+        TreeNode rightNode = construct_2(nums, index + 1, right);
+
+        root.left = leftNode;
+        root.right = rightNode;
+
+        return root;
+    }
+
+    public static void main(String[] args) {
+        int[] n = {3, 2, 1, 6, 0, 5};
+        new LC654().constructMaximumBinaryTree_2(n);
+    }
 }

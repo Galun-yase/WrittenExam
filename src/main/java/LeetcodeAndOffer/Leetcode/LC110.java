@@ -39,4 +39,16 @@ public class LC110 {
             this.right = right;
         }
     }
+
+    public boolean isBalanced_2(TreeNode root) {
+        if (root == null) return true;
+
+        return isBalanced_2(root.left) && isBalanced_2(root.right) && Math.abs(getHeight_2(root.left) - getHeight_2(root.right)) <= 1;
+    }
+
+    private int getHeight_2(TreeNode node) {
+        if (node == null) return 0;
+
+        return Math.max(getHeight_2(node.left), getHeight_2(node.right)) + 1;
+    }
 }

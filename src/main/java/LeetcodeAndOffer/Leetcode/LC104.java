@@ -25,4 +25,10 @@ public class LC104 {
             this.right = right;
         }
     }
+
+    public int maxDepth_2(TreeNode root) {
+        if (root == null) return 0;
+
+        return Math.max(maxDepth_2(root.left), maxDepth_2(root.right)) + 1;
+    }
 }

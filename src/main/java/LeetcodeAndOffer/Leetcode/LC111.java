@@ -57,4 +57,21 @@ public class LC111 {
             this.right = right;
         }
     }
+
+    public int minDepth_2(TreeNode root) {
+        if (root == null) return 0;
+
+        int leftD = minDepth_2(root.left);
+        int rightD = minDepth_2(root.right);
+
+        if (leftD == 0 && rightD == 0) {
+            return 1;
+        } else if (leftD == 0) {
+            return rightD + 1;
+        } else if (rightD == 0) {
+            return leftD + 1;
+        } else {
+            return Math.min(leftD, rightD) + 1;
+        }
+    }
 }
