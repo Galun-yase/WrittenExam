@@ -55,4 +55,42 @@ public class LC103 {
         }
     }
 
+    public List<List<Integer>> zigzagLevelOrder_2(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        } else {
+            queue.add(root);
+        }
+
+        boolean reverse = true;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+
+                list.add(node.val);
+            }
+
+            if (reverse) {
+                res.add(list);
+                reverse = false;
+            } else {
+                ArrayList<Integer> tmp = new ArrayList<>();
+                for (int i = list.size() - 1; i >= 0; i--) {
+                    tmp.add(list.get(i));
+                }
+                res.add(tmp);
+                reverse = true;
+            }
+        }
+        return res;
+    }
+
 }

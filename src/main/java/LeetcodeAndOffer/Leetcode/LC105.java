@@ -54,4 +54,36 @@ public class LC105 {
             this.right = right;
         }
     }
+
+    public TreeNode buildTree_2(int[] preorder, int[] inorder) {
+        // node.value : index
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            hashMap.put(inorder[i], i);
+        }
+
+        TreeNode root = new TreeNode(preorder[0]);
+
+        for (int i = 1; i < preorder.length; i++) {
+            TreeNode node = new TreeNode(preorder[i]);
+            insertNode_2(root, node, hashMap);
+        }
+        return root;
+    }
+
+    private void insertNode_2(TreeNode root, TreeNode node, HashMap<Integer, Integer> hashMap) {
+        while (root != node) {
+            if (hashMap.get(root.val) > hashMap.get(node.val)) {
+                if (root.left == null) {
+                    root.left = node;
+                }
+                root = root.left;
+            } else {
+                if (root.right == null) {
+                    root.right = node;
+                }
+                root = root.right;
+            }
+        }
+    }
 }

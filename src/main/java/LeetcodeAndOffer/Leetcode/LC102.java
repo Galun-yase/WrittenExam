@@ -47,4 +47,46 @@ public class LC102 {
             this.right = right;
         }
     }
+
+    public List<List<Integer>> levelOrder_2(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        ArrayList<Integer> list12 = new ArrayList<>();
+        list12.add(root.val);
+        res.add(list12);
+
+
+        List<TreeNode> list = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node != null) {
+                list.add(node.left);
+                list.add(node.right);
+            }
+
+            if (queue.isEmpty()) {
+                queue.addAll(list);
+
+                ArrayList<Integer> list1 = new ArrayList<>();
+                for (int i = 0; i < list.size(); i++) {
+                    TreeNode treeNode = list.get(i);
+                    if (treeNode != null) {
+                        list1.add(treeNode.val);
+                    }
+                }
+
+                if (list1.size() != 0) {
+                    res.add(list1);
+
+                }
+                list.clear();
+            }
+
+        }
+
+        return res;
+    }
 }
