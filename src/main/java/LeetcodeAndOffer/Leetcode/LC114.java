@@ -39,7 +39,7 @@ public class LC114 {
         return tail;
     }
 
-    public class TreeNode {
+    static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -56,5 +56,53 @@ public class LC114 {
             this.left = left;
             this.right = right;
         }
+    }
+
+    public void flatten_2(TreeNode root) {
+        flatten_return_2(root);
+    }
+
+    private TreeNode flatten_return_2(TreeNode root) {
+
+        if (root == null) return root;
+
+        TreeNode left = flatten_return_2(root.left);
+        TreeNode right = flatten_return_2(root.right);
+
+        if (left == null) {
+            root.right = right;
+            return root;
+        } else {
+            root.right = left;
+
+            TreeNode cur = left;
+            while (cur.right != null) {
+                cur = cur.right;
+            }
+            cur.right = right;
+        }
+        root.left = null;
+        return root;
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        TreeNode l = new TreeNode(2);
+        TreeNode ll = new TreeNode(3);
+        TreeNode lr = new TreeNode(4);
+        TreeNode r = new TreeNode(5);
+        TreeNode rr = new TreeNode(6);
+
+        root.left = l;
+        root.right = r;
+
+        l.left = ll;
+        l.right = lr;
+
+        r.right = rr;
+
+        new LC114().flatten_2(root);
+
+
     }
 }

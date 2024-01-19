@@ -93,4 +93,21 @@ public class LC236 {
         }
     }
 
+    public TreeNode lowestCommonAncestor_5(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return root;
+        if (root == p) return p;
+        if (root == q) return q;
+
+        TreeNode left = lowestCommonAncestor_5(root.left, p, q);
+        TreeNode right = lowestCommonAncestor_5(root.right, p, q);
+
+        if (left != null && right != null) {
+            return root;
+        } else if (left == null) {
+            return right;
+        } else {
+            return left;
+        }
+    }
+
 }

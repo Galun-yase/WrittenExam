@@ -47,4 +47,10 @@ public class LC222 {
             this.right = right;
         }
     }
+
+    public int countNodes_2(TreeNode root) {
+        if (root == null) return 0;
+
+        return countNodes_2(root.left) + countNodes_2(root.right) + 1;
+    }
 }
