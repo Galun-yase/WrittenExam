@@ -42,4 +42,38 @@ public class LC673 {
         int[] a = {1, 2, 4, 3, 5, 4, 7, 2};
         new LC673().findNumberOfLIS(a);
     }
+
+    public int findNumberOfLIS_2(int[] nums) {
+        int[] dp_sum = new int[nums.length];
+        int[] dp_len = new int[nums.length];
+        Arrays.fill(dp_sum, 1);
+        Arrays.fill(dp_len, 1);
+
+
+        int maxLength = 1;
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] <= nums[j]) continue;
+
+
+                if (dp_len[i] < dp_len[j] + 1) {
+                    dp_len[i] = dp_len[j] + 1;
+
+                    dp_sum[i] = dp_sum[j];
+                } else if (dp_len[i] == dp_len[j] + 1) {
+                    dp_sum[i] += dp_sum[j];
+                }
+            }
+            maxLength = Math.max(maxLength, dp_len[i]);
+        }
+
+        int sum = 0;
+        for (int i = 0; i < dp_sum.length; i++) {
+            if (maxLength == dp_len[i]) {
+                sum += dp_sum[i];
+            }
+        }
+
+        return sum;
+    }
 }
