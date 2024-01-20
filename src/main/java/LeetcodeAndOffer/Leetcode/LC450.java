@@ -47,4 +47,28 @@ public class LC450 {
             this.right = right;
         }
     }
+
+    public TreeNode deleteNode_2(TreeNode root, int key) {
+        if (root == null) return root;
+
+        if (root.val == key) {
+            if (root.left == null) return root.right;
+            if (root.right == null) return root.left;
+
+            TreeNode max = getMax(root.left);
+            root.val = max.val;
+
+            root.left = deleteNode_2(root.left, max.val);
+        } else if (root.val < key) {
+            root.right = deleteNode_2(root.right, key);
+        } else {
+            root.left = deleteNode_2(root.left, key);
+        }
+        return root;
+    }
+
+    private TreeNode getMax(TreeNode root) {
+        if (root.right == null) return root;
+        return getMax(root.right);
+    }
 }

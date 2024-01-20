@@ -43,4 +43,24 @@ public class LC530 {
         }
     }
 
+    ArrayList<Integer> midList = new ArrayList<>();
+
+    public int getMinimumDifference_2(TreeNode root) {
+        int min = Integer.MAX_VALUE;
+        dfs_2(root);
+
+        for (int i = 1; i < midList.size(); i++) {
+            min = Math.min(Math.abs(midList.get(i - 1) - midList.get(i)), min);
+        }
+        return min;
+    }
+
+    private void dfs_2(TreeNode root) {
+        if (root != null) {
+            dfs_2(root.left);
+            midList.add(root.val);
+            dfs_2(root.right);
+        }
+    }
+
 }

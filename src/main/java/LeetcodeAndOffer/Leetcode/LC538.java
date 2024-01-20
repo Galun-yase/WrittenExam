@@ -36,4 +36,20 @@ public class LC538 {
             this.right = right;
         }
     }
+
+    int value = 0;
+
+    public TreeNode convertBST_2(TreeNode root) {
+        convertBST_dfs(root);
+        return root;
+    }
+
+    private void convertBST_dfs(TreeNode root) {
+        if (root != null) {
+            convertBST_dfs(root.right);
+            value += root.val;
+            root.val = value;
+            convertBST_dfs(root.left);
+        }
+    }
 }

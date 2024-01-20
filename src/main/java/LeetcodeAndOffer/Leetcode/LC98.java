@@ -34,4 +34,23 @@ public class LC98 {
             this.right = right;
         }
     }
+
+    public boolean isValidBST_2(TreeNode root) {
+        return check_2(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean check_2(TreeNode root, Long min, Long max) {
+        if (root == null) return true;
+        if (root.val <= min || max <= root.val) return false;
+
+        if (root.left != null && root.right != null) {
+            return check_2(root.left, min, (long) root.val) && check_2(root.right, (long) root.val, max) && root.left.val < root.val && root.val < root.right.val;
+        } else if (root.left != null) {
+            return check_2(root.left, min, (long) root.val) && root.left.val < root.val;
+        } else if (root.right != null) {
+            return check_2(root.right, (long) root.val, max) && root.val < root.right.val;
+        } else {
+            return true;
+        }
+    }
 }
