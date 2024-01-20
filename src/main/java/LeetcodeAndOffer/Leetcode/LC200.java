@@ -255,4 +255,33 @@ public class LC200 {
 
 
     }
+
+    public int numIslands_4(char[][] grid) {
+        int res = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') {
+                    res++;
+                    dfs_4(grid, i, j);
+                }
+            }
+        }
+        return res;
+    }
+
+    private void dfs_4(char[][] grid, int x, int y) {
+        grid[x][y] = '0';
+
+        int[] dx = {-1, 0, 0, 1};
+        int[] dy = {0, -1, 1, 0};
+
+        for (int i = 0; i < 4; i++) {
+            int newX = x + dx[i];
+            int newY = y + dy[i];
+
+            if (0 <= newX && newX < grid.length && 0 <= newY && newY < grid[0].length && grid[newX][newY] == '1') {
+                dfs_4(grid, newX, newY);
+            }
+        }
+    }
 }

@@ -35,4 +35,43 @@ public class LC1020 {
             dfs(grid, newX, newY);
         }
     }
+
+    public int numEnclaves_2(int[][] grid) {
+        for (int i = 0; i < grid[0].length; i++) {
+            dfs_2(grid, 0, i);
+            dfs_2(grid, grid.length - 1, i);
+        }
+
+        for (int i = 0; i < grid.length; i++) {
+            dfs_2(grid, i, 0);
+            dfs_2(grid, i, grid[0].length - 1);
+        }
+
+        int res = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    private void dfs_2(int[][] grid, int x, int y) {
+        if (grid[x][y] == 0) return;
+        grid[x][y] = 0;
+
+        int[] dx = {-1, 0, 0, 1};
+        int[] dy = {0, -1, 1, 0};
+
+        for (int i = 0; i < 4; i++) {
+            int newX = x + dx[i];
+            int newY = y + dy[i];
+
+            if (0 <= newX && newX < grid.length && 0 <= newY & newY < grid[0].length && grid[newX][newY] == 1) {
+                dfs_2(grid, newX, newY);
+            }
+        }
+    }
 }

@@ -37,4 +37,41 @@ public class LC463 {
         }
         return res;
     }
+
+    public int islandPerimeter_2(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    return dfs_2(grid, i, j);
+                }
+            }
+        }
+        return 0;
+    }
+
+    private int dfs_2(int[][] grid, int x, int y) {
+        grid[x][y] = -1;
+
+        int[] dx = {-1, 0, 0, 1};
+        int[] dy = {0, -1, 1, 0};
+
+        int res = 0;
+        for (int i = 0; i < 4; i++) {
+            int newX = x + dx[i];
+            int newY = y + dy[i];
+
+            if (0 <= newX && newX < grid.length && 0 <= newY && newY < grid[0].length) {
+                if (grid[newX][newY] == 1) {
+                    res += dfs_2(grid, newX, newY);
+                }
+                if (grid[newX][newY] == 0) {
+                    res++;
+                }
+            } else {
+                res++;
+            }
+
+        }
+        return res;
+    }
 }
