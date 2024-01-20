@@ -58,7 +58,7 @@ public class LC215 {
     }
 
     public static void main(String[] args) {
-        int[] arr = {3,2,3,1,2,4,5,5,6};
+        int[] arr = {3, 2, 3, 1, 2, 4, 5, 5, 6};
         new LC215().findKthLargest_3(arr, 2);
         System.out.println();
     }
@@ -99,4 +99,19 @@ public class LC215 {
         return left;
     }
 
+    public int findKthLargest4(int[] nums, int k) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k) {
+                heap.add(nums[i]);
+            } else {
+                if (nums[i] > heap.peek()) {
+                    heap.poll();
+                    heap.add(nums[i]);
+                }
+            }
+        }
+        return heap.poll();
+    }
 }
