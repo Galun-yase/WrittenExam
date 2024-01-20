@@ -28,4 +28,45 @@ public class LC1603 {
             return true;
         }
     }
+
+    class ParkingSystem_2 {
+
+        int bigCap;
+        int medCap;
+        int smaCap;
+
+        public ParkingSystem_2(int big, int medium, int small) {
+            bigCap = big;
+            medCap = medium;
+            smaCap = small;
+        }
+
+        public boolean addCar(int carType) {
+            switch (carType) {
+                case 1:
+                    if (bigCap > 0) {
+                        bigCap--;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                case 2:
+                    if (medCap > 0) {
+                        medCap--;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                case 3:
+                    if (smaCap > 0) {
+                        smaCap--;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                default:
+                    return false;
+            }
+        }
+    }
 }
