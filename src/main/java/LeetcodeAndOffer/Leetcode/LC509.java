@@ -16,7 +16,7 @@ public class LC509 {
     // 未剪枝，时间复杂度高
     public int fib_recursion(int n) {
         if (n <= 1) return n;
-        return fib(n-1)+fib(n-2);
+        return fib(n - 1) + fib(n - 2);
     }
 
     public int fib_second(int n) {
@@ -24,6 +24,18 @@ public class LC509 {
         int[] ints = new int[n + 1];
         ints[0] = 0;
         ints[1] = 1;
+        for (int i = 2; i < n + 1; i++) {
+            ints[i] = ints[i - 1] + ints[i - 2];
+        }
+        return ints[n];
+    }
+
+    public int fib_3(int n) {
+        if (n == 0) return n;
+
+        int[] ints = new int[n + 1];
+        ints[1] = 1;
+
         for (int i = 2; i < n + 1; i++) {
             ints[i] = ints[i - 1] + ints[i - 2];
         }
