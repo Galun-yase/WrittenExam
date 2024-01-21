@@ -1,6 +1,6 @@
 package LeetcodeAndOffer.Leetcode;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class LC743 {
     public int networkDelayTime(int[][] times, int n, int k) {
@@ -49,5 +49,57 @@ public class LC743 {
             ans = Math.max(ans, dist[i]);
         }
         return ans == INF ? -1 : ans;
+    }
+
+    public int networkDelayTime_2(int[][] times, int n, int k) {
+        int INF = 10001;
+
+        int[][] g = new int[n + 1][n + 1];
+        for (int[] ints : g) {
+            Arrays.fill(ints, INF);
+        }
+
+        for (int i = 0; i < times.length; i++) {
+            int[] time = times[i];
+
+            int sIndex = time[0];
+            int tIndex = time[1];
+            g[sIndex][tIndex] = time[2];
+        }
+
+        //从k出发到各点的最近距离
+        int[] dist = new int[n + 1];
+        Arrays.fill(dist, INF);
+        dist[k] = 0;
+
+        // 会导致n次遍历完后，还有节点没遍历到。已访问过的节点再次访问数据不会改变
+        boolean[] visited = new boolean[n + 1];
+
+        for (int i = 0; i < n; i++) {
+
+            int x = -1;
+            for (int j = 1; j < n + 1; j++) {
+                if (!visited[j] && (x == -1 || dist[x] > dist[j])) {
+                    x = j;
+                }
+            }
+
+            visited[x] = true;
+
+            for (int j = 1; j < n + 1; j++) {
+                dist[j] = Math.min(dist[j], dist[x] + g[x][j]);
+            }
+        }
+
+        int res = 0;
+        for (int i = 1; i < n + 1; i++) {
+            res = Math.max(res, dist[i]);
+        }
+        return res == INF ? -1 : res;
+    }
+
+    public static void main(String[] args) {
+        int[][] ints = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
+        new LC743().networkDelayTime_2(ints, 4, 2);
     }
 }

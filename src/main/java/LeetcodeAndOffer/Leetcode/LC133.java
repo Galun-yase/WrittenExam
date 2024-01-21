@@ -44,4 +44,24 @@ public class LC133 {
             neighbors = _neighbors;
         }
     }
+
+    private HashMap<Integer, Node> map = new HashMap<>();
+
+    public Node cloneGraph_2(Node node) {
+        if (node == null) return null;
+        if (map.containsKey(node.val)) return map.get(node.val);
+
+        int val = node.val;
+        Node cloneNode = new Node(val);
+        map.put(val, cloneNode);
+
+        ArrayList<Node> ne = new ArrayList<>();
+        List<Node> neighbors = node.neighbors;
+        for (Node neighbor : neighbors) {
+            Node n = cloneGraph_2(neighbor);
+            ne.add(n);
+        }
+        cloneNode.neighbors = ne;
+        return cloneNode;
+    }
 }

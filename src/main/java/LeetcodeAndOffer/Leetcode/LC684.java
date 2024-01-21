@@ -51,4 +51,46 @@ public class LC684 {
             }
         }
     }
+
+
+    private List<List<Integer>> g;
+    private boolean[] hasVisited;
+    private boolean isHasCycle;
+
+    public int[] findRedundantConnection_2(int[][] edges) {
+        g = new ArrayList<>(edges.length + 1);
+
+        for (int i = 0; i < edges.length + 1; i++) {
+            g.add(new ArrayList<>());
+        }
+
+        for (int[] edge : edges) {
+            g.get(edge[0]).add(edge[1]);
+            g.get(edge[1]).add(edge[0]);
+
+            hasVisited = new boolean[edges.length + 1];
+            isHasCycle = false;
+            dfs_2(edge[0], -1);
+
+            if (isHasCycle) return edge;
+        }
+        return null;
+    }
+
+    private void dfs_2(int curNode, int fatherNode) {
+        hasVisited[curNode] = true;
+
+        List<Integer> list = g.get(curNode);
+        for (Integer nextNode : list) {
+            // 递归到自身结束1->2->1
+            if (nextNode == fatherNode) continue;
+
+            // 碰到环了
+            if (hasVisited[nextNode]) {
+                isHasCycle = true;
+                return;
+            }
+            dfs_2(nextNode, curNode);
+        }
+    }
 }
