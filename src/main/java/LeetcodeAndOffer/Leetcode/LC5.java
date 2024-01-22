@@ -34,4 +34,34 @@ public class LC5 {
         }
         return s.substring(maxIndex, maxIndex + maxLength);
     }
+
+    public String longestPalindrome_2(String s) {
+        if (s == null || s.length() == 0) return s;
+        // i-j之间是否为回文串
+        boolean[][] dp = new boolean[s.length()][s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            dp[i][i] = true;
+        }
+
+        int maxLen = 1;
+        int index = 0;
+        for (int i = s.length() - 2; i >= 0; i--) {
+            for (int j = i + 1; j < s.length(); j++) {
+
+                if (s.charAt(i) == s.charAt(j) && (dp[i + 1][j - 1] || j - i + 1 == 2)) {
+                    dp[i][j] = true;
+
+                    if (j - i + 1 > maxLen) {
+                        maxLen = j - i + 1;
+                        index = i;
+                    }
+
+                } else {
+                    dp[i][j] = false;
+                }
+            }
+        }
+
+        return s.substring(index, index + maxLen);
+    }
 }
