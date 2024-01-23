@@ -15,4 +15,34 @@ public class LC120 {
         }
         return dp[0];
     }
+
+    public int minimumTotal_2(List<List<Integer>> triangle) {
+        for (int i = 1; i < triangle.size(); i++) {
+            List<Integer> list = triangle.get(i);
+
+            for (int j = 0; j < list.size(); j++) {
+                Integer num = list.get(j);
+
+                if (j == 0) {
+                    Integer cur = triangle.get(i - 1).get(j);
+                    list.set(j, num + cur);
+                } else if (j == list.size() - 1) {
+                    Integer pre = triangle.get(i - 1).get(j - 1);
+                    list.set(j, num + pre);
+                } else {
+                    Integer cur = triangle.get(i - 1).get(j);
+                    Integer pre = triangle.get(i - 1).get(j - 1);
+
+                    list.set(j, num + Math.min(cur, pre));
+                }
+            }
+        }
+
+        int res = Integer.MAX_VALUE;
+        List<Integer> last = triangle.get(triangle.size() - 1);
+        for (Integer integer : last) {
+            res = Math.min(res, integer);
+        }
+        return res;
+    }
 }

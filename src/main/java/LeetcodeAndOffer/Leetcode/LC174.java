@@ -27,4 +27,43 @@ public class LC174 {
         }
         return dp[0][0];
     }
+
+    public int calculateMinimumHP_2(int[][] dungeon) {
+        int m = dungeon.length;
+        int n = dungeon[0].length;
+
+        int[][] dp = new int[m][n];
+
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+
+                if (i + 1 < m && j + 1 < n) {
+                    dp[i][j] = Math.min(dp[i + 1][j] - dungeon[i][j], dp[i][j + 1] - dungeon[i][j]);
+                } else if (i + 1 < m) {
+                    dp[i][j] = dp[i + 1][j] - dungeon[i][j];
+                } else if (j + 1 < n) {
+                    dp[i][j] = dp[i][j + 1] - dungeon[i][j];
+                } else {
+                    int num = dungeon[i][j];
+
+                    if (num >= 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = 1 - num;
+                    }
+                }
+
+                dp[i][j] = Math.max(1, dp[i][j]);
+            }
+        }
+
+        return dp[0][0];
+    }
+
+    public static void main(String[] args) {
+        int[][] dp = {{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}};
+
+        new LC174().calculateMinimumHP_2(dp);
+
+    }
 }
