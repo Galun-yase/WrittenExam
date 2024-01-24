@@ -1,6 +1,9 @@
 package LeetcodeAndOffer.Leetcode;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LC322 {
     public int coinChange(int[] coins, int amount) {
@@ -49,5 +52,34 @@ public class LC322 {
             }
         }
         return dp[coins.length][amount] == amount + 1 ? -1 : dp[coins.length][amount];
+    }
+
+
+    public int coinChange_2(int[] coins, int amount) {
+        Arrays.sort(coins);
+        if (amount == 0) return 0;
+        if (coins[0] > amount) return -1;
+        Set<Integer> set = Arrays.stream(coins).boxed().collect(Collectors.toSet());
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+
+        for (int i = 0; i < amount + 1; i++) {
+            if (set.contains(i)) {
+                dp[i] = 1;
+            }
+        }
+        dp[0] = 0;
+
+        for (int i = coins[0] + 1; i < amount + 1; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (i > coins[j] && dp[i - coins[j]] != Integer.MAX_VALUE) {
+
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+
+                }
+            }
+        }
+
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
     }
 }

@@ -39,4 +39,23 @@ public class LC337 {
             this.right = right;
         }
     }
+
+    public int rob_2(TreeNode root) {
+        int[] dp = robNode(root);
+        return Math.max(dp[0], dp[1]);
+    }
+
+    private int[] robNode(TreeNode root) {
+        if (root == null) return new int[]{0, 0};
+
+
+        int[] left = robNode(root.left);
+        int[] right = robNode(root.right);
+
+        int[] dp = new int[2];
+
+        dp[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        dp[1] = left[0] + right[0] + root.val;
+        return dp;
+    }
 }
