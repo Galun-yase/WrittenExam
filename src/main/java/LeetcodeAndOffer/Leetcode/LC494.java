@@ -10,8 +10,8 @@ public class LC494 {
         // 不可能凑出为小数的背包
         if ((sum + target) % 2 == 1) return 0;
         // target过大不能凑出
-        if ( target < 0 && sum < -target) return 0;
-        if ( target > 0 && sum < target) return 0;
+        if (target < 0 && sum < -target) return 0;
+        if (target > 0 && sum < target) return 0;
 
         int bagSize = (sum + target) / 2;
         if (bagSize < 0) bagSize = -bagSize;
@@ -30,12 +30,45 @@ public class LC494 {
                 // 超过背包大小，不选择
                 if (j < nums[i - 1]) {
                     dp[i][j] = dp[i - 1][j];
-                // 当前元素可以选择，也可以不选择，故求方案总数
+                    // 当前元素可以选择，也可以不选择，故求方案总数
                 } else {
                     dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i - 1]];
                 }
             }
         }
         return dp[nums.length][bagSize];
+    }
+
+    public int findTargetSumWays_2(int[] nums, int target) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        if ((sum + target) % 2 != 0) return 0;
+        if (sum < Math.abs(target)) return 0;
+        int pos = (sum + target) / 2;
+
+        int[][] dp = new int[nums.length + 1][pos + 1];
+        for (int i = 0; i < nums.length + 1; i++) {
+            dp[i][0] = 1;
+        }
+
+        for (int i = 1; i < nums.length + 1; i++) {
+            for (int j = 0; j < pos + 1; j++) {
+
+                if (j < nums[i - 1]) {
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i - 1]];
+                }
+            }
+        }
+        return dp[nums.length][pos];
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1, 1, 1, 1, 1};
+        new LC494().findTargetSumWays_2(a, 3);
     }
 }
