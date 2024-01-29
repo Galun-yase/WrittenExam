@@ -49,4 +49,53 @@ public class LC547 {
         }
     }
 
+    public int findCircleNum_2(int[][] isConnected) {
+        int length = isConnected.length;
+
+        UnionFind_2 unionFind2 = new UnionFind_2(length);
+
+        for (int i = 0; i < isConnected.length; i++) {
+            for (int j = 0; j < isConnected.length; j++) {
+
+                if (isConnected[i][j] == 1) {
+                    unionFind2.union(i, j);
+                }
+            }
+        }
+        return unionFind2.count;
+    }
+
+    class UnionFind_2 {
+
+        int count;
+        int[] array;
+
+        UnionFind_2(int n) {
+            count = n;
+            array = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                array[i] = i;
+            }
+        }
+
+        void union(int p, int q) {
+            int pIndex = find(p);
+            int qIndex = find(q);
+
+            if (pIndex != qIndex) {
+                array[qIndex] = pIndex;
+                count--;
+            }
+        }
+
+        int find(int index) {
+
+            if (array[index] == index) {
+                return index;
+            }
+
+            return find(array[index]);
+        }
+    }
 }
