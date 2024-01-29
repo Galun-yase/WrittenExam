@@ -50,6 +50,28 @@ public class LC260 {
 
         int a = 8;
         System.out.println(Integer.toBinaryString(a));
-        System.out.println(a & (-a));
+        System.out.println(Integer.lowestOneBit(a));
+    }
+
+    public int[] singleNumber_3(int[] nums) {
+        int res = 0;
+        for (int num : nums) {
+            res ^= num;
+        }
+
+        int index = Integer.lowestOneBit(res);
+        int a = 0;
+        int b = 0;
+
+        for (int num : nums) {
+
+            if ((index & num) == 0) {
+                a ^= num;
+            } else {
+                b ^= num;
+            }
+        }
+
+        return new int[]{a, b};
     }
 }
