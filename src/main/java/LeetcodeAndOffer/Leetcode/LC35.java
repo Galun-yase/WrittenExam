@@ -24,4 +24,25 @@ public class LC35 {
         if (left == nums.length) return left;
         return nums[left] > target ? left : left + 1;
     }
+
+    public int searchInsert_2(int[] nums, int target) {
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return left;
+
+    }
 }
