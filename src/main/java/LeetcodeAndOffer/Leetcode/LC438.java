@@ -38,4 +38,42 @@ public class LC438 {
         }
         return true;
     }
+
+    public List<Integer> findAnagrams_2(String s, String p) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (s.length() < p.length()) {
+            return res;
+        }
+
+        int[] map = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            map[p.charAt(i) - 'a']++;
+        }
+
+        for (int i = 0; i < p.length(); i++) {
+            map[s.charAt(i) - 'a']--;
+        }
+        if (checkAna(map)) {
+            res.add(0);
+        }
+
+        for (int i = p.length(); i < s.length(); i++) {
+            map[s.charAt(i) - 'a']--;
+            map[s.charAt(i - p.length()) - 'a']++;
+
+            if (checkAna(map)) {
+                res.add(i - p.length() + 1);
+            }
+        }
+        return res;
+    }
+
+    private boolean checkAna(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

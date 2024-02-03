@@ -1,5 +1,6 @@
 package LeetcodeAndOffer.Leetcode;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -34,5 +35,32 @@ public class LC239 {
             res[i - k + 1] = deque.peekFirst();
         }
         return res;
+    }
+
+    public int[] maxSlidingWindow_2(int[] nums, int k) {
+        LinkedList<Integer> deque = new LinkedList<>();
+
+        for (int i = 0; i < k; i++) {
+            while (!deque.isEmpty() && deque.getLast() < nums[i]) {
+                deque.removeLast();
+            }
+            deque.addLast(nums[i]);
+        }
+
+        ArrayList<Integer> res = new ArrayList<>();
+        res.add(deque.getFirst());
+
+        for (int i = k; i < nums.length; i++) {
+            while (!deque.isEmpty() && deque.getLast() < nums[i]) {
+                deque.removeLast();
+            }
+            deque.addLast(nums[i]);
+
+            if (!deque.isEmpty() && deque.getFirst() == nums[i - k]) {
+                deque.removeFirst();
+            }
+            res.add(deque.getFirst());
+        }
+        return res.stream().mapToInt(Integer::intValue).toArray();
     }
 }

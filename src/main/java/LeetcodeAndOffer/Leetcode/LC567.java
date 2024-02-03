@@ -33,4 +33,41 @@ public class LC567 {
         }
         return true;
     }
+
+    private boolean checkAna(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkInclusion_2(String s1, String s2) {
+        if (s2.length() < s1.length()) {
+            return false;
+        }
+
+        int[] map = new int[26];
+        for (int i = 0; i < s1.length(); i++) {
+            map[s1.charAt(i) - 'a']++;
+        }
+
+        for (int i = 0; i < s1.length(); i++) {
+            map[s2.charAt(i) - 'a']--;
+        }
+        if (checkAna(map)) {
+            return true;
+        }
+
+        for (int i = s1.length(); i < s2.length(); i++) {
+            map[s2.charAt(i) - 'a']--;
+            map[s2.charAt(i - s1.length()) - 'a']++;
+
+            if (checkAna(map)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

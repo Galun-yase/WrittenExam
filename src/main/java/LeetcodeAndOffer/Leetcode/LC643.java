@@ -17,4 +17,21 @@ public class LC643 {
         }
         return largest;
     }
+
+    public double findMaxAverage_2(int[] nums, int k) {
+        double sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+
+        double res = sum / k;
+
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i];
+            sum -= nums[i - k];
+
+            res = Math.max(res, sum / k);
+        }
+        return res;
+    }
 }
