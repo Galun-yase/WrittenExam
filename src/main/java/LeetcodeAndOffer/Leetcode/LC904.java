@@ -24,4 +24,26 @@ public class LC904 {
         }
         return res;
     }
+
+    public int totalFruit_2(int[] fruits) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        int start = 0;
+        int res = 0;
+
+        for (int i = 0; i < fruits.length; i++) {
+            hashMap.put(fruits[i], hashMap.getOrDefault(fruits[i], 0) + 1);
+            while (hashMap.size() > 2) {
+                if (hashMap.get(fruits[start]) == 1) {
+                    hashMap.remove(fruits[start]);
+                } else {
+                    hashMap.put(fruits[start], hashMap.get(fruits[start]) - 1);
+                }
+                start++;
+            }
+
+            res = Math.max(res, i - start + 1);
+        }
+        return res;
+    }
 }

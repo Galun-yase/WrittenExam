@@ -36,4 +36,43 @@ public class LC76 {
         }
         return minLength == s.length() + 1 ? "" : s.substring(left, left + minLength);
     }
+
+    public String minWindow_2(String s, String t) {
+        if (s == null || t == null || s.length() < t.length() || t.length() == 0) {
+            return "";
+        }
+        int[] map = new int[128];
+        for (int i = 0; i < t.length(); i++) {
+            map[t.charAt(i)]++;
+        }
+
+        int index = 0;
+        int minLen = s.length() + 1;
+        int start = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            map[s.charAt(i)]--;
+            while (check(map)) {
+                if (i - start + 1 < minLen) {
+                    minLen = i - start + 1;
+                    index = start;
+                }
+
+                map[s.charAt(start)]++;
+                start++;
+            }
+
+        }
+        return minLen == s.length() + 1 ? "" : s.substring(index, index + minLen);
+    }
+
+    private boolean check(int[] map) {
+
+        for (int i = 0; i < map.length; i++) {
+            if (map[i] > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
